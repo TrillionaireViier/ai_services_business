@@ -1,13 +1,282 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>buildora</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Готово — готові сайти, боти та хостинг під ключ</title>
+<meta name="description" content="Готові сайти під ключ, чат-боти, хостинг і SEO з фіксованою ціною. Запуск за 3–7 днів.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0f1c;--panel:#111a2e;--line:#22304d;--text:#e8edf7;--mut:#8d9bb8;--acc:#3dffa2;--acc2:#4d8bff;--r:14px}
+:root[data-theme=light]{--bg:#f4f7fc;--panel:#fff;--line:#d9e1ef;--text:#0e1730;--mut:#5a6885;--acc:#0a9f62;--acc2:#2a62e8}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:400 16px/1.6 Onest,system-ui,sans-serif}
+h1,h2,h3{font-family:Unbounded,Onest,sans-serif;line-height:1.15}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+h2{font-size:clamp(24px,4vw,36px);margin-bottom:12px}
+.lead{color:var(--mut);max-width:60ch;margin-bottom:36px}
+.btn{display:inline-block;border:0;cursor:pointer;font:600 15px Onest,sans-serif;padding:13px 22px;border-radius:10px;background:var(--acc);color:#04130c}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn:hover{filter:brightness(1.1)}
+:focus-visible{outline:2px solid var(--acc2);outline-offset:3px}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.logo{font:700 20px Unbounded,sans-serif;margin-right:auto}.logo i{color:var(--acc);font-style:normal}
+nav{display:flex;gap:20px;color:var(--mut);font-size:14px}nav a:hover{color:var(--text)}
+#theme{background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;width:38px;height:38px;cursor:pointer}
+.hero{padding:80px 0 56px}
+.hero h1{font-size:clamp(32px,6.5vw,64px);max-width:16ch;margin-bottom:20px}
+.hero h1 span{color:var(--acc)}
+.hero p{color:var(--mut);font-size:18px;max-width:52ch;margin-bottom:28px}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:48px}
+.perk{border-left:3px solid var(--acc);padding:4px 0 4px 14px}
+.perk b{display:block}.perk span{color:var(--mut);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:10px}
+.card.hot{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc),0 8px 40px -16px var(--acc)}
+.card h3{font-size:18px}
+.card p{color:var(--mut);font-size:14px}
+.price{font:700 28px Unbounded,sans-serif}.price small{font:400 13px Onest;color:var(--mut)}
+.card ul{list-style:none;padding:0;color:var(--mut);font-size:14px;display:grid;gap:6px;margin-bottom:auto}
+.card li:before{content:"✓ ";color:var(--acc)}
+.tag{font-size:13px;color:var(--acc2)}
+.sw{display:inline-flex;border:1px solid var(--line);border-radius:10px;padding:4px;margin-bottom:24px}
+.sw button{border:0;background:none;color:var(--mut);padding:8px 16px;border-radius:7px;cursor:pointer;font:500 14px Onest}
+.sw button.on{background:var(--acc);color:#04130c}
+.calc{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer}
+.opt input{accent-color:var(--acc);width:18px;height:18px}
+.opt span:nth-child(2){flex:1}.opt em{font-style:normal;color:var(--mut)}
+.total{position:sticky;top:84px;align-self:start}
+.total .price{font-size:36px;color:var(--acc)}
+.rev{font-size:15px}.rev b{display:block;margin-top:8px;font-size:14px}.rev span{color:var(--mut);font-size:13px}
+.port .shot{height:120px;border-radius:10px;background:linear-gradient(135deg,var(--acc2),var(--acc));opacity:.85}
+details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600}
+details p{color:var(--mut);margin-top:10px}
+form{display:grid;gap:12px}
+input[type=text],input[type=tel],select,textarea{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:inherit}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mut);font-size:14px}
+dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;padding:26px;width:min(440px,92vw)}
+dialog::backdrop{background:rgba(0,0,0,.65)}
+.ok{color:var(--acc);font-weight:600}
+@media(max-width:760px){nav{display:none}.calc,.contact{grid-template-columns:1fr}.total{position:static}section{padding:52px 0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="#top">Готово<i>.</i></a>
+  <nav><a href="#sites">Сайти</a><a href="#bots">Боти</a><a href="#hosting">Хостинг</a><a href="#calc">Калькулятор</a><a href="#faq">FAQ</a></nav>
+  <button id="theme" aria-label="Змінити тему">◐</button>
+  <a class="btn" href="#contact">Замовити</a>
+</div></header>
+
+<main id="top">
+<section class="hero"><div class="wrap">
+  <h1>Готовий сайт за 3 дні. <span>Без сюрпризів у ціні.</span></h1>
+  <p>Обираєте пакет, ми налаштовуємо дизайн, домен і хостинг під ваш бізнес. Фіксована вартість, чесні терміни, підтримка після запуску.</p>
+  <div class="row"><a class="btn" href="#sites">Обрати сайт</a><a class="btn ghost" href="#calc">Порахувати вартість</a></div>
+  <div class="perks">
+    <div class="perk"><b>Запуск від 3 днів</b><span>Шаблон + ваш контент = онлайн</span></div>
+    <div class="perk"><b>Аптайм 99,9%</b><span>Моніторинг 24/7 і щоденні бекапи</span></div>
+    <div class="perk"><b>Підтримка в Telegram</b><span>Відповідаємо протягом години</span></div>
+    <div class="perk"><b>Фіксована ціна</b><span>Усе, що входить, записано в договорі</span></div>
+  </div>
+</div></section>
+
+<section id="sites"><div class="wrap">
+  <h2>Готові сайти під ключ</h2>
+  <p class="lead">Оберіть тип сайту. Ми підберемо дизайн, наповнимо контентом і запустимо на вашому домені.</p>
+  <div class="grid" id="siteGrid"></div>
+</div></section>
+
+<section id="bots"><div class="wrap">
+  <h2>Чат-боти, що продають і відповідають замість вас</h2>
+  <p class="lead">Telegram, Viber і корпоративні боти. Приймають заявки, відповідають на питання клієнтів і передають дані у вашу CRM.</p>
+  <div class="grid" id="botGrid"></div>
+</div></section>
+
+<section id="hosting"><div class="wrap">
+  <h2>Хостинг і домен без головного болю</h2>
+  <p class="lead">Швидкі сервери, SSL, щоденні бекапи й технічна підтримка. Оплачуйте щомісяця або за рік і заощаджуйте 20%.</p>
+  <div class="sw" role="group" aria-label="Період оплати"><button class="on" data-p="m">Щомісяця</button><button data-p="y">Щороку −20%</button></div>
+  <div class="grid" id="hostGrid"></div>
+</div></section>
+
+<section id="calc"><div class="wrap">
+  <h2>Калькулятор вартості</h2>
+  <p class="lead">Позначте потрібне, і сума порахується одразу. Остаточну ціну підтвердимо після короткої розмови.</p>
+  <div class="calc">
+    <div class="opts" id="opts"></div>
+    <div class="card total">
+      <span class="tag">Орієнтовна вартість</span>
+      <div class="price" id="sum">0 ₴</div>
+      <ul id="picked"><li>Нічого не обрано</li></ul>
+      <button class="btn" id="sendCalc">Надіслати розрахунок</button>
+    </div>
+  </div>
+</div></section>
+
+<section id="cases"><div class="wrap">
+  <h2>Кейси</h2>
+  <p class="lead">Кілька проєктів, які ми запустили для клієнтів.</p>
+  <div class="grid">
+    <div class="card port"><div class="shot"></div><h3>Магазин кави «Зерно»</h3><p>Інтернет-магазин з оплатою онлайн. Запуск за 6 днів, перші замовлення в день старту.</p></div>
+    <div class="card port"><div class="shot" style="filter:hue-rotate(60deg)"></div><h3>Барбершоп «Борода»</h3><p>Лендинг із записом через Telegram-бота. Адміністратор більше не сидить на телефоні.</p></div>
+    <div class="card port"><div class="shot" style="filter:hue-rotate(160deg)"></div><h3>Логістична компанія</h3><p>Корпоративний сайт із CRM-інтеграцією. Заявки потрапляють прямо менеджерам.</p></div>
+  </div>
+</div></section>
+
+<section id="reviews"><div class="wrap">
+  <h2>Відгуки клієнтів</h2>
+  <p class="lead" style="margin-bottom:24px">Замініть ці тексти на реальні відгуки ваших клієнтів.</p>
+  <div class="grid">
+    <div class="card rev">«Сайт був готовий за чотири дні, і ціна не змінилася.»<b>Олена, власниця кав'ярні</b><span>Інтернет-магазин</span></div>
+    <div class="card rev">«Бот забрав на себе половину повторюваних питань. Менеджери нарешті встигають продавати.»<b>Андрій, директор з продажів</b><span>Telegram-бот + CRM</span></div>
+    <div class="card rev">«Хостинг працює без збоїв уже рік, а на повідомлення в Telegram відповідають одразу.»<b>Марина, маркетолог</b><span>Хостинг і підтримка</span></div>
+  </div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+  <h2>Часті запитання</h2><div style="height:20px"></div>
+  <details><summary>Що буде після покупки?</summary><p>Ми передаємо доступи, показуємо, як редагувати сайт, і 30 днів безкоштовно виправляємо помилки.</p></details>
+  <details><summary>Чи можна змінити дизайн під мій бренд?</summary><p>Так. Кольори, шрифти й логотип входять у кожен пакет. Повністю індивідуальний дизайн замовляється окремо.</p></details>
+  <details><summary>Хто володіє сайтом і доменом?</summary><p>Ви. Домен реєструється на вас, а код сайту можна забрати в будь-який момент.</p></details>
+  <details><summary>Як відбувається оплата?</summary><p>50% на старті, 50% після погодження готового сайту. Приймаємо картки та безготівковий розрахунок.</p></details>
+  <details><summary>Що, якщо мені потрібні зміни пізніше?</summary><p>Дрібні правки робимо в межах підтримки. Для великих доробок узгоджуємо окрему вартість заздалегідь.</p></details>
+</div></section>
+
+<section id="contact"><div class="wrap contact">
+  <div>
+    <h2>Залишіть заявку</h2>
+    <p class="lead">Передзвонимо або напишемо в месенджері протягом години в робочий час (пн–пт, 9:00–19:00).</p>
+    <div class="row"><a class="btn ghost" href="https://t.me/your_studio" target="_blank" rel="noopener">Telegram</a><a class="btn ghost" href="mailto:hello@gotovo.example">hello@gotovo.example</a></div>
+  </div>
+  <form id="leadForm" class="card">
+    <input type="text" name="name" placeholder="Ім'я" required autocomplete="name">
+    <input type="tel" name="phone" placeholder="Телефон або @telegram" required>
+    <select name="service"><option>Готовий сайт</option><option>Чат-бот</option><option>Хостинг і домен</option><option>Додаткові послуги</option></select>
+    <textarea name="msg" rows="3" placeholder="Коротко про ваш проєкт"></textarea>
+    <button class="btn" type="submit">Надіслати заявку</button>
+    <p class="ok" id="formOk" hidden>Дякуємо! Ми зв'яжемося з вами найближчим часом.</p>
+  </form>
+</div></section>
+</main>
+
+<footer><div class="wrap">© 2026 Готово. Усі права захищено.</div></footer>
+
+<dialog id="modal">
+  <form id="orderForm" method="dialog">
+    <h3 id="mTitle" style="font-size:20px">Замовлення</h3>
+    <p id="mInfo" style="color:var(--mut);font-size:14px"></p>
+    <input type="text" placeholder="Ім'я" required>
+    <input type="tel" placeholder="Телефон або @telegram" required>
+    <div class="row"><button class="btn" value="ok">Надіслати</button><button class="btn ghost" value="cancel" formnovalidate>Скасувати</button></div>
+    <p class="ok" id="mOk" hidden>Заявку прийнято. Ми скоро напишемо.</p>
+  </form>
+</dialog>
+
+<script>
+const fmt=n=>n.toLocaleString('uk-UA')+' ₴';
+const sites=[
+ {n:'Візитка',d:'Одна сторінка про вас і ваші послуги.',p:3900,t:'3 дні',f:['До 5 блоків','Форма заявки','Адаптивний дизайн']},
+ {n:'Лендинг',d:'Продаючий сайт під одну пропозицію.',p:7900,t:'5 днів',f:['До 10 блоків','Аналітика й піксель','Швидке завантаження'],hot:1},
+ {n:'Корпоративний сайт',d:'Повноцінний сайт компанії.',p:14900,t:'7 днів',f:['До 8 сторінок','Блог і новини','Базове SEO']},
+ {n:'Інтернет-магазин',d:'Каталог, кошик і онлайн-оплата.',p:19900,t:'10 днів',f:['До 100 товарів','Оплата карткою','Адмін-панель']}
+];
+const bots=[
+ {n:'Автовідповідач',d:'Відповідає на типові питання 24/7.',p:2900,t:'2 дні',f:['Меню та FAQ','Збір контактів','Telegram або Viber']},
+ {n:'Бот для заявок і оплат',d:'Приймає замовлення й гроші.',p:6900,t:'5 днів',f:['Каталог і кошик','Приймання оплат','Сповіщення менеджеру'],hot:1},
+ {n:'Бот з CRM-інтеграцією',d:'Автоматизація продажів і процесів.',p:12900,t:'від 7 днів',f:['Інтеграція з CRM','Розсилки й сегменти','Звіти для команди']},
+ {n:'Бот-меню ресторану',d:'Онлайн замовлення страв та доставка.',p:5500,t:'4 дні',f:['Вітрина страв','Інтеграція з кур`єрами','Знижки та промокоди']},
+ {n:'Бот техпідтримки (Helpdesk)',d:'Система тікетів для підтримки клієнтів.',p:7500,t:'6 днів',f:['Створення тікетів','Перехід на оператора','Історія звернень']},
+ {n:'Бот для запису (Салони/СТО)',d:'Автоматизація бронювання часу.',p:8900,t:'7 днів',f:['Календар записів','Нагадування клієнтам','Адмін-панель']},
+ {n:'Крипто-бот',d:'Інтеграція з крипто-платежами та курсами.',p:15000,t:'10 днів',f:['Прийом USDT/BTC','Курси валют онлайн','P2P обмінник']},
+ {n:'Бот-вікторина (Квіз)',d:'Генерація лідів через гейміфікацію.',p:4500,t:'3 дні',f:['Інтерактивні тести','Збір email/телефонів','Видача бонусів']},
+ {n:'Бот для інфобізнесу',d:'Платформа для проведення курсів.',p:11500,t:'8 днів',f:['Видача уроків','Тестування учнів','Оплата курсів']},
+ {n:'Бот-магазин (Web App)',d:'Повноцінний інтернет-магазин у Telegram.',p:14500,t:'10 днів',f:['Telegram Mini App','Кошик та еквайринг','Синхронізація складу'],hot:1},
+ {n:'Бот-розсильник',d:'Масові розсилки повідомлень.',p:3500,t:'2 дні',f:['Сегментація аудиторії','Відкладені повідомлення','Аналітика прочитань']},
+ {n:'Бот для HR / Рекрутингу',d:'Анкетування та онбординг персоналу.',p:6500,t:'5 днів',f:['Збір резюме','Тестування кандидатів','База співробітників']},
+ {n:'Бот-афіша / Івенти',d:'Продаж квитків на події.',p:9900,t:'7 днів',f:['Розклад подій','QR-квитки','Нагадування про подію']},
+ {n:'Бот для нерухомості',d:'Пошук та оренда житла.',p:10500,t:'8 днів',f:['Фільтри (ціна/район)','Галерея фото','Прямий зв`язок з ріелтором']},
+ {n:'Бот фітнес-тренера',d:'Програми тренувань та харчування.',p:5900,t:'5 днів',f:['Калькулятор калорій','Відео-уроки','Трекінг прогресу']},
+ {n:'Бот-перекладач спільнот',d:'Автоматичний переклад у чатах.',p:4000,t:'3 дні',f:['Підтримка 50+ мов','Модерація чату','Переклад на льоту']},
+ {n:'Бот таск-менеджер',d:'Управління завданнями для команди.',p:8000,t:'6 днів',f:['Створення задач','Дедлайни та статуси','Сповіщення учасників']},
+ {n:'Бот бронювання готелів',d:'Перевірка номерів та бронювання.',p:11000,t:'7 днів',f:['Вибір дат та номерів','Синхронізація броней','Онлайн оплата']},
+ {n:'Закритий клуб (Підписка)',d:'Приватний доступ за підпискою.',p:7900,t:'5 днів',f:['Рекурентні платежі','Авто-видалення боржників','Статистика клубу'],hot:1},
+ {n:'AI-бот (ChatGPT)',d:'Розумний ШІ-асистент для бізнесу.',p:18000,t:'14 днів',f:['Навчання на вашій базі','Генерація відповідей','Аналіз настрою клієнтів']}
+];
+const hosts=[
+ {n:'Старт',m:150,f:['10 ГБ NVMe','1 сайт','SSL і бекапи']},
+ {n:'Бізнес',m:300,f:['30 ГБ NVMe','5 сайтів','Пріоритетна підтримка'],hot:1},
+ {n:'Максимум',m:700,f:['100 ГБ NVMe','Без обмежень','Виділені ресурси']}
+];
+const addons=[
+ ['Готовий сайт: лендинг',7900],['Готовий сайт: інтернет-магазин',19900],['Telegram-бот',6900],
+ ['SEO-оптимізація',4500],['Підключення платіжної системи',2500],['Індивідуальний дизайн',9900],
+ ['Налаштування реклами',3500],['Хостинг на рік (Бізнес)',2880]
+];
+const $=s=>document.querySelector(s);
+const card=(x,price,sub)=>`<div class="card${x.hot?' hot':''}"><h3>${x.n}</h3>${x.d?`<p>${x.d}</p>`:''}${x.t?`<span class="tag">Запуск: ${x.t}</span>`:''}<ul>${x.f.map(i=>`<li>${i}</li>`).join('')}</ul><div class="price">${price}<small>${sub||''}</small></div><button class="btn${x.hot?'':' ghost'}" data-order="${x.n}" data-price="${price}">Замовити</button></div>`;
+$('#siteGrid').innerHTML=sites.map(x=>card(x,fmt(x.p),' / фіксовано')).join('');
+$('#botGrid').innerHTML=bots.map(x=>card(x,'від '+fmt(x.p))).join('');
+function renderHost(p){
+ $('#hostGrid').innerHTML=hosts.map(x=>{
+  const v=p==='y'?Math.round(x.m*12*.8):x.m;
+  return card(x,fmt(v),p==='y'?' / рік':' / міс');
+ }).join('');
+}
+renderHost('m');
+document.querySelectorAll('.sw button').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('.sw button').forEach(o=>o.classList.toggle('on',o===b));
+ renderHost(b.dataset.p);
+});
+// калькулятор
+$('#opts').innerHTML=addons.map((a,i)=>`<label class="opt"><input type="checkbox" data-i="${i}"><span>${a[0]}</span><em>${fmt(a[1])}</em></label>`).join('');
+function calc(){
+ const on=[...document.querySelectorAll('#opts input:checked')].map(c=>addons[c.dataset.i]);
+ $('#sum').textContent=fmt(on.reduce((s,a)=>s+a[1],0));
+ $('#picked').innerHTML=on.length?on.map(a=>`<li>${a[0]}</li>`).join(''):'<li>Нічого не обрано</li>';
+ return on;
+}
+$('#opts').addEventListener('change',calc);
+// модальне вікно
+const modal=$('#modal');
+function openModal(title,info){
+ $('#mTitle').textContent=title;$('#mInfo').textContent=info;$('#mOk').hidden=true;modal.showModal();
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-order]');
+ if(b)openModal('Замовити: '+b.dataset.order,'Вартість: '+b.dataset.price);
+});
+$('#sendCalc').onclick=()=>{
+ const on=calc();
+ if(!on.length){$('#sum').textContent='Оберіть хоча б одну послугу';return}
+ openModal('Ваш розрахунок',on.map(a=>a[0]).join(', ')+'. Разом: '+$('#sum').textContent);
+};
+$('#orderForm').addEventListener('submit',e=>{
+ if(e.submitter&&e.submitter.value==='ok'){
+  e.preventDefault();$('#mOk').hidden=false;
+  setTimeout(()=>modal.close(),1500); // TODO: надсилання на ваш бекенд або в Telegram-бота
+ }
+});
+$('#leadForm').addEventListener('submit',e=>{
+ e.preventDefault();$('#formOk').hidden=false;e.target.reset(); // TODO: підключіть бекенд
+});
+// тема
+$('#theme').onclick=()=>{
+ const r=document.documentElement;
+ r.dataset.theme=r.dataset.theme==='light'?'dark':'light';
+};
+</script>
+</body>
 </html>
