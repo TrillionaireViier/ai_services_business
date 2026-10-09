@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Бізнес — Детальна інформація</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0f1c;--panel:#111a2e;--line:#22304d;--text:#e8edf7;--mut:#8d9bb8;--acc:#3dffa2;--acc2:#4d8bff;--r:14px}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--text);font:400 16px/1.6 Onest,sans-serif;padding:0;margin:0;}
+header{padding:20px;border-bottom:1px solid var(--line);display:flex;align-items:center;background:var(--panel);}
+.logo{font:700 20px Unbounded,sans-serif;color:var(--text);text-decoration:none;}
+.logo i{color:var(--acc);font-style:normal}
+.container{max-width:800px;margin:60px auto;padding:0 20px;}
+h1{font-family:Unbounded,sans-serif;font-size:36px;margin-bottom:20px;color:var(--acc);}
+.desc{font-size:18px;color:var(--mut);margin-bottom:30px;}
+.features{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:30px;margin-bottom:40px;}
+.features h3{font-family:Unbounded,sans-serif;margin-bottom:20px;}
+.features ul{list-style:none;padding:0;}
+.features li{padding:10px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
+.features li:before{content:'✓';color:var(--acc);font-weight:bold;}
+.features li:last-child{border-bottom:none;}
+.price-box{display:flex;align-items:center;justify-content:space-between;padding:20px;background:linear-gradient(90deg,var(--panel),rgba(61,255,162,0.1));border-radius:12px;border:1px solid var(--acc);flex-wrap:wrap;gap:20px;}
+.price{font-family:Unbounded,sans-serif;font-size:28px;}
+.btn{background:var(--acc);color:#000;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;}
+.btn:hover{filter:brightness(1.1);}
+</style>
+</head>
+<body>
+<header>
+  <a href="index.html" class="logo">Готово<i>.</i></a>
+  <a href="index.html" style="margin-left:auto;color:var(--mut);text-decoration:none;">← Назад на головну</a>
+</header>
+<div class="container">
+  <h1>Бізнес</h1>
+  <p class="desc">Оптимально для кількох проєктів.</p>
+  <div class="features">
+    <h3>Що входить у вартість:</h3>
+    <ul>
+      <li>Індивідуальний підхід</li><li>Підтримка 24/7</li><li>Швидкий запуск</li><li>Гарантія якості</li>
+    </ul>
+  </div>
+  <div class="price-box">
+    <div>
+      <div style="color:var(--mut);font-size:14px;">Орієнтовна вартість:</div>
+      <div class="price">300 ₴ / міс</div>
+    </div>
+    <a href="index.html#contact" class="btn">Замовити зараз</a>
+  </div>
+</div>
+</body>
+</html>
