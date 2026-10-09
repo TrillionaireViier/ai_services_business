@@ -172,7 +172,15 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
 </div></section>
 </main>
 
-<footer><div class="wrap">© 2026 Готово. Усі права захищено.</div></footer>
+<footer>
+  <div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;">
+    <div>© 2026 Готово. Усі права захищено.</div>
+    <div style="display:flex;gap:20px;font-size:13px;">
+      <a href="#" onclick="openModal('Політика конфіденційності', 'Тут буде розміщено повний текст політики конфіденційності та обробки персональних даних.')" style="text-decoration:underline;">Політика конфіденційності</a>
+      <a href="#" onclick="openModal('Публічна оферта', 'Тут буде розміщено договір публічної оферти (Умови використання сервісу).')" style="text-decoration:underline;">Договір оферти</a>
+    </div>
+  </div>
+</footer>
 
 <dialog id="modal">
   <form id="orderForm" method="dialog">
