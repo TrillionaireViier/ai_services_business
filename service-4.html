@@ -9,45 +9,182 @@
 :root{--bg:#0a0f1c;--panel:#111a2e;--line:#22304d;--text:#e8edf7;--mut:#8d9bb8;--acc:#3dffa2;--acc2:#4d8bff;--r:14px}
 *{box-sizing:border-box;margin:0}
 body{background:var(--bg);color:var(--text);font:400 16px/1.6 Onest,sans-serif;padding:0;margin:0;}
-header{padding:20px;border-bottom:1px solid var(--line);display:flex;align-items:center;background:var(--panel);}
+header{padding:20px;border-bottom:1px solid var(--line);display:flex;align-items:center;background:var(--panel);position:sticky;top:0;z-index:100;}
 .logo{font:700 20px Unbounded,sans-serif;color:var(--text);text-decoration:none;}
 .logo i{color:var(--acc);font-style:normal}
-.container{max-width:800px;margin:60px auto;padding:0 20px;}
-h1{font-family:Unbounded,sans-serif;font-size:36px;margin-bottom:20px;color:var(--acc);}
+section{padding:60px 20px;border-bottom:1px solid var(--line);}
+.container{max-width:900px;margin:0 auto;}
+h1,h2,h3{font-family:Unbounded,sans-serif;color:var(--text);margin-bottom:20px;}
+h1{font-size:36px;color:var(--acc);}
+h2{font-size:28px;text-align:center;}
 .desc{font-size:18px;color:var(--mut);margin-bottom:30px;}
-.features{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:30px;margin-bottom:40px;}
-.features h3{font-family:Unbounded,sans-serif;margin-bottom:20px;}
-.features ul{list-style:none;padding:0;}
-.features li{padding:10px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
-.features li:before{content:'✓';color:var(--acc);font-weight:bold;}
-.features li:last-child{border-bottom:none;}
-.price-box{display:flex;align-items:center;justify-content:space-between;padding:20px;background:linear-gradient(90deg,var(--panel),rgba(61,255,162,0.1));border-radius:12px;border:1px solid var(--acc);flex-wrap:wrap;gap:20px;}
-.price{font-family:Unbounded,sans-serif;font-size:28px;}
-.btn{background:var(--acc);color:#000;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;}
+.price-box{display:flex;align-items:center;justify-content:space-between;padding:30px;background:linear-gradient(90deg,var(--panel),rgba(61,255,162,0.1));border-radius:12px;border:1px solid var(--acc);flex-wrap:wrap;gap:20px;}
+.price{font-family:Unbounded,sans-serif;font-size:32px;}
+.btn{background:var(--acc);color:#000;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;cursor:pointer;border:none;}
 .btn:hover{filter:brightness(1.1);}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:30px;}
+.card{background:var(--panel);padding:25px;border-radius:12px;border:1px solid var(--line);}
+.card h3{font-size:18px;color:var(--acc2);margin-bottom:10px;}
+ul.check-list{list-style:none;padding:0;}
+ul.check-list li{padding:12px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:15px;}
+ul.check-list li:before{content:'✓';color:var(--acc);font-weight:bold;font-size:20px;}
+ul.check-list li:last-child{border-bottom:none;}
+.step{display:flex;gap:20px;margin-bottom:20px;}
+.step-num{background:var(--line);color:var(--acc);font-family:Unbounded,sans-serif;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:20px;flex-shrink:0;}
+.faq-item{background:var(--panel);margin-bottom:15px;padding:20px;border-radius:12px;border:1px solid var(--line);}
+.faq-item h4{font-size:18px;margin-bottom:10px;color:var(--acc2);}
+.faq-item p{color:var(--mut);font-size:15px;}
+footer{padding:30px 20px;text-align:center;color:var(--mut);font-size:14px;}
 </style>
 </head>
 <body>
+<!-- Block 1: Header -->
 <header>
-  <a href="/" class="logo">Готово<i>.</i></a>
+  <a href="/" class="logo">Gotovo<i>.</i></a>
   <a href="/" style="margin-left:auto;color:var(--mut);text-decoration:none;">← Назад на головну</a>
 </header>
-<div class="container">
-  <h1>Автовідповідач</h1>
-  <p class="desc">Відповідає на типові питання 24/7.</p>
-  <div class="features">
-    <h3>Що входить у вартість:</h3>
-    <ul>
-      <li>Індивідуальний підхід</li><li>Підтримка 24/7</li><li>Швидкий запуск</li><li>Гарантія якості</li>
-    </ul>
-  </div>
-  <div class="price-box">
-    <div>
-      <div style="color:var(--mut);font-size:14px;">Орієнтовна вартість:</div>
-      <div class="price">2 900 ₴</div>
+
+<!-- Block 2: Hero -->
+<section style="padding-top:80px;padding-bottom:80px;">
+  <div class="container">
+    <h1>Автовідповідач</h1>
+    <p class="desc">Відповідає на типові питання 24/7.</p>
+    <div class="price-box">
+      <div>
+        <div style="color:var(--mut);font-size:14px;">Орієнтовна вартість:</div>
+        <div class="price">2 900 ₴</div>
+      </div>
+      <a href="#order" class="btn">Замовити зараз</a>
     </div>
-    <a href="/#contact" class="btn">Замовити зараз</a>
   </div>
-</div>
+</section>
+
+<!-- Block 3: Features -->
+<section>
+  <div class="container">
+    <h2>Що входить у вартість:</h2>
+    <div class="card" style="margin-top:30px;">
+      <ul class="check-list">
+        <li>Індивідуальний дизайн та розробка</li><li>Підтримка 24/7 протягом року</li><li>Базове SEO та оптимізація швидкості</li><li>Гарантія якості та безперебійної роботи</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Block 4: Target Audience -->
+<section style="background:var(--panel);">
+  <div class="container">
+    <h2>Для кого підійде ця послуга?</h2>
+    <div class="grid">
+      <div class="card" style="background:var(--bg);">
+        <h3>Малому бізнесу</h3>
+        <p style="color:var(--mut);">Для тих, хто хоче швидко запуститися і почати отримувати клієнтів.</p>
+      </div>
+      <div class="card" style="background:var(--bg);">
+        <h3>Підприємцям</h3>
+        <p style="color:var(--mut);">Для автоматизації рутини та збільшення продажів.</p>
+      </div>
+      <div class="card" style="background:var(--bg);">
+        <h3>Компаніям</h3>
+        <p style="color:var(--mut);">Для масштабування та виходу на новий рівень.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Block 5: Workflow -->
+<section>
+  <div class="container">
+    <h2>Як ми працюємо</h2>
+    <div style="margin-top:40px;max-width:600px;margin-inline:auto;">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h3 style="margin-bottom:5px;">Заявка</h3>
+          <p style="color:var(--mut);">Ви залишаєте заявку, ми зв'язуємося з вами для обговорення деталей.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h3 style="margin-bottom:5px;">Бриф</h3>
+          <p style="color:var(--mut);">Фіксуємо вимоги, ціну та терміни в договорі.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h3 style="margin-bottom:5px;">Розробка</h3>
+          <p style="color:var(--mut);">Ми створюємо продукт, налаштовуємо та тестуємо його.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <h3 style="margin-bottom:5px;">Запуск</h3>
+          <p style="color:var(--mut);">Ви отримуєте готовий результат та інструкції з використання.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Block 6: Why Us -->
+<section style="background:var(--panel);">
+  <div class="container">
+    <h2>Чому варто обрати нас</h2>
+    <div class="grid">
+      <div class="card" style="background:var(--bg);">
+        <h3>Фіксована ціна</h3>
+        <p style="color:var(--mut);">Жодних прихованих платежів. Ціна не змінюється в процесі.</p>
+      </div>
+      <div class="card" style="background:var(--bg);">
+        <h3>Швидкий запуск</h3>
+        <p style="color:var(--mut);">Ми використовуємо готові модулі, щоб запустити проєкт за лічені дні.</p>
+      </div>
+      <div class="card" style="background:var(--bg);">
+        <h3>Підтримка 24/7</h3>
+        <p style="color:var(--mut);">Ми завжди на зв'язку і готові допомогти після запуску.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Block 7: FAQ -->
+<section>
+  <div class="container">
+    <h2>Поширені запитання</h2>
+    <div style="margin-top:30px;">
+      <div class="faq-item">
+        <h4>Чи можна змінити дизайн пізніше?</h4>
+        <p>Так, проєкт легко масштабується та змінюється за потреби.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Як відбувається оплата?</h4>
+        <p>Оплата ділиться на дві частини: 50% перед початком, 50% після здачі.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Чи потрібні мені технічні знання?</h4>
+        <p>Ні, ми беремо всю технічну частину на себе і даємо зручну адмінку.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Block 8: CTA / Contact -->
+<section id="order" style="background:linear-gradient(180deg, var(--bg), var(--panel));text-align:center;">
+  <div class="container">
+    <h2 style="color:var(--acc);">Готові почати?</h2>
+    <p class="desc">Залиште заявку, і ми безкоштовно проконсультуємо вас щодо проєкту.</p>
+    <a href="/#contact" class="btn" style="font-size:20px;padding:15px 40px;">Замовити зараз</a>
+  </div>
+</section>
+
+<!-- Block 9: Footer -->
+<footer>
+  <div class="container">
+    © 2026 Gotovo. Усі права захищено.
+  </div>
+</footer>
 </body>
 </html>
