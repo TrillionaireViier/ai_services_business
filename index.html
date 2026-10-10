@@ -313,6 +313,7 @@ textarea.input-control {
   font-size: 12px;
   font-weight: 600;
   color: var(--mut);
+  transition: all 0.3s;
 }
 .step-item.active { color: var(--cyan); }
 .step-item.completed { color: var(--green); }
@@ -445,7 +446,7 @@ textarea.input-control {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  transition: aspect-ratio 0.3s ease;
+  transition: all 0.3s ease;
 }
 .video-viewport.aspect-916 {
   aspect-ratio: 9/16;
@@ -611,7 +612,7 @@ textarea.input-control {
         <span style="font-size:10px;color:var(--cyan);font-family:'JetBrains Mono';">FULL PIPELINE</span>
       </div>
       <label>Topic / Prompt</label>
-      <textarea id="topicInputA" class="input-control" placeholder="e.g. The Quantum Computing Breakthrough that threatens global cryptography"></textarea>
+      <textarea id="topicInputA" class="input-control" placeholder="e.g. Quantum Computing Cryptography Breakthrough"></textarea>
       
       <div class="select-row">
         <div class="input-group">
@@ -624,9 +625,9 @@ textarea.input-control {
         <div class="input-group">
           <label>Target Duration</label>
           <select id="durationSelect" class="input-control">
+            <option value="30">30 Seconds</option>
             <option value="60">60 Seconds</option>
             <option value="180">3 Minutes</option>
-            <option value="600">10 Minutes</option>
           </select>
         </div>
       </div>
@@ -640,7 +641,7 @@ textarea.input-control {
         </select>
       </div>
 
-      <button class="btn-produce" onclick="launchProduction()">
+      <button id="btnProduceA" class="btn-produce" onclick="launchProduction()">
         🚀 LAUNCH PRODUCTION PIPELINE
       </button>
     </div>
@@ -682,7 +683,7 @@ textarea.input-control {
       <span style="font-size:10px;color:var(--green);font-family:'JetBrains Mono';">LIVE RADAR</span>
     </div>
     <div style="display:flex;flex-direction:column;gap:8px;">
-      <div class="trend-card" onclick="selectTrend('Quantum Computing Breakthrough')">
+      <div class="trend-card" onclick="selectTrend('Quantum Computing Security Break')">
         <div class="trend-header">
           <span class="trend-score">SCORE: 9.6/10</span>
           <span style="font-size:10px;color:var(--orange);">HIGH VELOCITY</span>
@@ -696,7 +697,7 @@ textarea.input-control {
         </div>
       </div>
 
-      <div class="trend-card" onclick="selectTrend('Autonomous AI Workforce in Supply & Freight')">
+      <div class="trend-card" onclick="selectTrend('Autonomous AI Workforce in Freight & Logistics')">
         <div class="trend-header">
           <span class="trend-score">SCORE: 9.2/10</span>
           <span style="font-size:10px;color:var(--cyan);">VIRAL POTENTIAL</span>
@@ -794,10 +795,10 @@ textarea.input-control {
 
       <div style="font-size:11px;font-weight:700;color:var(--mut-light);margin-top:2px;">AI THUMBNAIL CONCEPTS</div>
       <div class="thumbs-grid">
-        <div class="thumb-item active">Concept 1</div>
-        <div class="thumb-item">Concept 2</div>
-        <div class="thumb-item">Concept 3</div>
-        <div class="thumb-item">Concept 4</div>
+        <div class="thumb-item active" onclick="selectThumb(1)">Concept 1</div>
+        <div class="thumb-item" onclick="selectThumb(2)">Concept 2</div>
+        <div class="thumb-item" onclick="selectThumb(3)">Concept 3</div>
+        <div class="thumb-item" onclick="selectThumb(4)">Concept 4</div>
       </div>
 
       <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:10px;display:flex;justify-content:space-between;align-items:center;font-size:12px;">
@@ -816,7 +817,7 @@ let isPlaying = false;
 let currentTime = 0;
 let totalTime = 30;
 let timerInterval = null;
-let currentSceneIndex = 0;
+let isProcessing = false;
 
 let scenes = [
   { time: "00:00 - 00:05", text: "What if every encrypted password on Earth became instantly readable?", prompt: "Cyberpunk glowing server room, digital padlock breaking", asset: "AI Visual (Flux v1)", bg: "linear-gradient(135deg, #090d16, #00f0ff)" },
@@ -842,7 +843,9 @@ function switchMode(mode) {
 
 function selectTrend(topic) {
   document.getElementById('topicInputA').value = topic;
+  switchMode('A');
   log('Selected Trend: ' + topic);
+  launchProduction();
 }
 
 function changeAspect(val) {
@@ -882,39 +885,79 @@ function log(msg) {
 }
 
 function launchProduction() {
+  if (isProcessing) return;
   const topic = document.getElementById('topicInputA').value || 'Quantum Computing Cryptography Breakthrough';
-  log('Starting Production Pipeline for: ' + topic);
+  log('🚀 Launching Production Pipeline for: ' + topic);
   
-  // Pipeline Stepper Animation
-  animateStepper();
+  // Custom Dynamic Scenes Generation based on topic
+  generateDynamicScenes(topic);
+  animatePipeline();
 }
 
 function launchModeB() {
-  const url = document.getElementById('sourceUrl').value || 'Uploaded Document';
-  log('Extracting entities & facts from: ' + url);
-  animateStepper();
+  if (isProcessing) return;
+  const url = document.getElementById('sourceUrl').value || 'Source Document';
+  log('🔍 Ingesting & Verifying facts from: ' + url);
+  generateDynamicScenes('Ingested Source Analysis: ' + url);
+  animatePipeline();
 }
 
 function launchModeC() {
-  log('Assembling Directed Storyboard constraints...');
-  animateStepper();
+  if (isProcessing) return;
+  const scriptText = document.getElementById('directedScript').value || 'Directed Storyboard Script';
+  log('🎬 Assembling Directed Storyboard constraints...');
+  generateDynamicScenes(scriptText);
+  animatePipeline();
 }
 
-function animateStepper() {
-  let step = 1;
+function generateDynamicScenes(topic) {
+  scenes = [
+    { time: "00:00 - 00:06", text: "Hook: " + topic + " is rapidly changing the global paradigm.", prompt: "High-tech cinematic intro with glowing neon data streams", asset: "AI Visual (Midjourney v6)", bg: "linear-gradient(135deg, #090d16, #00f0ff)" },
+    { time: "00:06 - 00:16", text: "Key Discovery: Verified sources confirm a 10x breakthrough in operational speed.", prompt: "Interactive 3D telemetry bar chart with glowing metrics", asset: "Dynamic Motion Chart", bg: "linear-gradient(135deg, #1e1b4b, #a855f7)" },
+    { time: "00:16 - 00:24", text: "Market Impact: Automated agents now read, route, and resolve tasks in under 1 second.", prompt: "Global network map with active route nodes", asset: "Stock Video (4K UHD)", bg: "linear-gradient(135deg, #111827, #ff6b2b)" },
+    { time: "00:24 - 00:30", text: "Conclusion: Subscribe to stay ahead of the next AI disruption wave.", prompt: "Glowing futuristic badge animation", asset: "Motion Graphic", bg: "linear-gradient(135deg, #064e3b, #10b981)" }
+  ];
+  renderScenes();
+}
+
+function animatePipeline() {
+  isProcessing = true;
+  const btn = document.getElementById('btnProduceA');
+  if (btn) btn.textContent = '⚙️ EXECUTING PIPELINE...';
+
+  // Reset Stepper
+  for (let i = 1; i <= 5; i++) {
+    const el = document.getElementById('step' + i);
+    el.className = 'step-item';
+  }
+  document.getElementById('step1').className = 'step-item active';
+
+  let currentStep = 1;
+  const logs = [
+    "Step 1: Running modular research adapters & fact verification...",
+    "Step 2: Structuring Hook -> Context -> Data -> Resolution script...",
+    "Step 3: Matching Semantic Visual Hierarchy (Flux / Stock / Motion)...",
+    "Step 4: Synthesizing punctuation-aware TTS audio narration...",
+    "Step 5: Layering FFmpeg composite, captions & audio ducking..."
+  ];
+
   const interval = setInterval(() => {
-    step++;
-    if (step <= 5) {
-      document.getElementById('step' + step).classList.add('active');
-      if (step > 1) document.getElementById('step' + (step - 1)).classList.add('completed');
-      log('Completed Pipeline Step ' + (step - 1));
+    log(logs[currentStep - 1]);
+    document.getElementById('step' + currentStep).className = 'step-item completed';
+    
+    currentStep++;
+    if (currentStep <= 5) {
+      document.getElementById('step' + currentStep).className = 'step-item active';
     } else {
-      document.getElementById('step5').classList.add('completed');
-      log('🎉 PIPELINE COMPLETE! Master video compiled.');
       clearInterval(interval);
-      togglePlay();
+      isProcessing = false;
+      if (btn) btn.textContent = '🚀 LAUNCH PRODUCTION PIPELINE';
+      log('🎉 MASTER RENDER COMPLETE! 1080p 60fps Ready.');
+      
+      // Auto Start Playback
+      if (!isPlaying) togglePlay();
     }
-  }, 800);
+  }, 700);
 }
 
 function togglePlay() {
@@ -924,7 +967,7 @@ function togglePlay() {
     btn.textContent = '⏸';
     timerInterval = setInterval(() => {
       currentTime += 0.5;
-      if (currentTime > totalTime) {
+      if (currentTime >= totalTime) {
         currentTime = 0;
       }
       updatePlayer();
@@ -951,8 +994,8 @@ function updatePlayer() {
 
 function highlightText(text) {
   const words = text.split(' ');
-  if (words.length > 4) {
-    words[3] = '<span class="highlight-word">' + words[3] + '</span>';
+  if (words.length > 3) {
+    words[2] = '<span class="highlight-word">' + words[2] + '</span>';
   }
   return words.join(' ');
 }
@@ -966,9 +1009,9 @@ function seekVideo(e) {
 }
 
 function regenScene(i) {
-  log('Regenerating scene ' + (i + 1) + ' visual prompt...');
-  scenes[i].asset = 'AI Visual (Flux v2 Optimized)';
-  scenes[i].bg = 'linear-gradient(135deg, #10b981, #00f0ff)';
+  log('Regenerating scene ' + (i + 1) + ' with Flux v2.4...');
+  scenes[i].asset = 'AI Visual (Flux v2.4 Ultra)';
+  scenes[i].bg = 'linear-gradient(135deg, #059669, #00f0ff)';
   renderScenes();
   updatePlayer();
 }
@@ -986,19 +1029,30 @@ function editScene(i) {
 function addNewScene() {
   scenes.push({
     time: "00:30 - 00:35",
-    text: "New autonomous scene added dynamically.",
-    prompt: "Futuristic digital interface animation",
-    asset: "Motion Graphic",
-    bg: "linear-gradient(135deg, #a855f7, #00f0ff)"
+    text: "Interactive dynamic scene inserted into timeline.",
+    prompt: "Futuristic digital matrix glow animation",
+    asset: "Motion Graphic Overlay",
+    bg: "linear-gradient(135deg, #7e22ce, #00f0ff)"
   });
   totalTime += 5;
   renderScenes();
-  log('Added new scene to storyboard.');
+  log('Added new scene to timeline.');
+}
+
+function selectThumb(num) {
+  document.querySelectorAll('.thumb-item').forEach((t, i) => {
+    t.classList.toggle('active', i === num - 1);
+  });
+  log('Selected AI Thumbnail Concept #' + num);
 }
 
 function downloadMaster() {
-  alert('📥 Downloading Master Render (1080p 60fps MP4) + Metadata Package (JSON)...');
-  log('Downloaded Master Render & Metadata Package.');
+  log('📥 Triggering Download: Master Render (1080p 60fps MP4) + Metadata Package (JSON)');
+  alert('✅ Master Video Render & Metadata Package successfully generated!
+
+- File: master_render_1080p60.mp4
+- QA Status: Passed 100%
+- Total Cost: $0.42');
 }
 </script>
 
