@@ -195,7 +195,44 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
 
 <script>
 
-const fmt=n=>'
+const fmt=n=>'$'+n;
+const sites=[
+ {n:'Business Card',d:'One page about you and your services.',p:99,t:'3 days',f:['Up to 5 blocks','Contact form','Responsive design']},
+ {n:'Landing Page',d:'Sales page for a single offer.',p:199,t:'5 days',f:['Up to 10 blocks','Analytics & Pixel','Fast loading'],hot:1},
+ {n:'Corporate Site',d:'Full-fledged company website.',p:375,t:'7 days',f:['Up to 8 pages','Blog & News','Basic SEO']},
+ {n:'Online Store',d:'Catalog, cart, and online payment.',p:499,t:'10 days',f:['Up to 100 products','Card payment','Admin panel']}
+];
+const bots=[
+ {n:'Autoresponder',d:'Answers FAQs 24/7.',p:75,t:'2 days',f:['Menu & FAQ','Lead generation','Telegram or Viber']},
+ {n:'Order & Payment Bot',d:'Accepts orders and money.',p:175,t:'5 days',f:['Catalog & cart','Accept payments','Manager alerts'],hot:1},
+ {n:'CRM Integration Bot',d:'Automates sales and processes.',p:325,t:'from 7 days',f:['CRM integration','Broadcasts & segments','Team reports']},
+ {n:'Restaurant Menu Bot',d:'Online food ordering & delivery.',p:139,t:'4 days',f:['Food catalog','Courier integration','Discounts & promo']},
+ {n:'Helpdesk Bot',d:'Ticket system for customer support.',p:189,t:'6 days',f:['Create tickets','Switch to agent','Request history']},
+ {n:'Booking Bot',d:'Automates time booking.',p:225,t:'7 days',f:['Booking calendar','Client reminders','Admin panel']},
+ {n:'Crypto Bot',d:'Crypto payments and live rates.',p:375,t:'10 days',f:['Accept USDT/BTC','Live rates','P2P exchange']},
+ {n:'Quiz Bot',d:'Lead generation through gamification.',p:115,t:'3 days',f:['Interactive tests','Collect email/phone','Issue bonuses']},
+ {n:'Course Bot',d:'Platform for conducting courses.',p:289,t:'8 days',f:['Issue lessons','Student testing','Course payments']},
+ {n:'Web App Store',d:'Full online store in Telegram.',p:365,t:'10 days',f:['Telegram Mini App','Cart & acquiring','Inventory sync'],hot:1},
+ {n:'Broadcast Bot',d:'Mass message broadcasting.',p:89,t:'2 days',f:['Audience segmentation','Scheduled messages','Read analytics']},
+ {n:'HR & Recruiting Bot',d:'Questionnaires and onboarding.',p:165,t:'5 days',f:['Collect CVs','Candidate testing','Employee DB']},
+ {n:'Event Bot',d:'Ticket sales for events.',p:249,t:'7 days',f:['Event schedule','QR tickets','Event reminders']},
+ {n:'Real Estate Bot',d:'Search and rent properties.',p:265,t:'8 days',f:['Filters (price/area)','Photo gallery','Direct contact to agent']},
+ {n:'Fitness Bot',d:'Training and nutrition programs.',p:149,t:'5 days',f:['Calorie calculator','Video lessons','Progress tracking']},
+ {n:'Translator Bot',d:'Automatic translation in chats.',p:99,t:'3 days',f:['Supports 50+ languages','Chat moderation','Live translation']},
+ {n:'Task Manager Bot',d:'Task management for the team.',p:199,t:'6 days',f:['Create tasks','Deadlines & status','Member alerts']},
+ {n:'Hotel Booking Bot',d:'Check rooms and book.',p:275,t:'7 days',f:['Select dates & rooms','Booking sync','Online payment']},
+ {n:'Private Club (Sub)',d:'Private access by subscription.',p:199,t:'5 days',f:['Recurring payments','Auto-kick debtors','Club stats'],hot:1},
+ {n:'AI Assistant (ChatGPT)',d:'Smart AI assistant for business.',p:450,t:'14 days',f:['Trained on your DB','Generate answers','Client mood analysis']}
+];
+const hosts=[
+ {n:'Start',m:4,f:['10 GB NVMe','1 site','SSL & backups']},
+ {n:'Business',m:8,f:['30 GB NVMe','5 sites','Priority support'],hot:1},
+ {n:'Maximum',m:18,f:['100 GB NVMe','Unlimited sites','Dedicated resources']}
+];
+const addons=[
+ ['Basic SEO',50],['Logo Design',75],['Copywriting (per page)',25],
+ ['CRM Setup',125],['Ad Setup',89],['Yearly Hosting (Business)',72]
+];
 const $=s=>document.querySelector(s);
 const card=(x,price,sub,id)=>`<div class="card${x.hot?' hot':''}"><h3>${x.n}</h3>${x.d?`<p>${x.d}</p>`:''}${x.t?`<span class="tag">Launch: ${x.t}</span>`:''}<ul>${x.f.map(i=>`<li>${i}</li>`).join('')}</ul><div class="price">${price}<small>${sub||''}</small></div><div style="display:flex;flex-direction:column;gap:8px;margin-top:auto;"><button class="btn${x.hot?'':' ghost'}" data-order="${x.n}" data-price="${price}">Order</button><a href="service-${id}" class="btn ghost" style="padding:6px;border:none;text-decoration:underline;font-size:13px;color:var(--mut);text-align:center;">Learn More</a></div></div>`;
 $('#siteGrid').innerHTML=sites.map((x,i)=>card(x,fmt(x.p),' / fixed', i)).join('');
