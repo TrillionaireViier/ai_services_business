@@ -19,7 +19,7 @@ h2{font-size:28px;}
 .stat{background:var(--bg);padding:20px;border-radius:10px;text-align:center;}
 .stat-val{font-size:32px;font-family:Unbounded,sans-serif;color:var(--acc2);margin-bottom:5px;}
 .stat-lbl{color:var(--mut);font-size:14px;}
-.btn{background:var(--acc);color:#000;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;cursor:pointer;border:none;}
+.btn{background:var(--text);color:var(--bg);padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;cursor:pointer;border:none;}
 .btn:hover{filter:brightness(1.1);}
 footer{padding:30px 20px;text-align:center;color:var(--mut);font-size:14px;}
 `;

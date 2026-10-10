@@ -16,7 +16,7 @@ h2{font-size:28px;text-align:center;}
 .desc{font-size:18px;color:var(--mut);margin-bottom:30px;}
 .price-box{display:flex;align-items:center;justify-content:space-between;padding:30px;background:linear-gradient(90deg,var(--panel),rgba(61,255,162,0.1));border-radius:12px;border:1px solid var(--acc);flex-wrap:wrap;gap:20px;}
 .price{font-family:Unbounded,sans-serif;font-size:32px;}
-.btn{background:var(--acc);color:#000;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;cursor:pointer;border:none;}
+.btn{background:var(--text);color:var(--bg);padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;cursor:pointer;border:none;}
 .btn:hover{filter:brightness(1.1);}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:30px;}
 .card{background:var(--panel);padding:25px;border-radius:12px;border:1px solid var(--line);}

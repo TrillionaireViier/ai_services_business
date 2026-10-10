@@ -21,7 +21,7 @@ a{color:inherit;text-decoration:none}
 section{padding:72px 0}
 h2{font-size:clamp(24px,4vw,36px);margin-bottom:12px}
 .lead{color:var(--mut);max-width:60ch;margin-bottom:36px}
-.btn{display:inline-block;border:0;cursor:pointer;font:600 15px Onest,sans-serif;padding:13px 22px;border-radius:10px;background:var(--acc);color:#04130c}
+.btn{display:inline-block;border:0;cursor:pointer;font:600 15px Onest,sans-serif;padding:13px 22px;border-radius:10px;background:var(--text);color:var(--bg)}
 .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
 .btn:hover{filter:brightness(1.1)}
 :focus-visible{outline:2px solid var(--acc2);outline-offset:3px}
@@ -49,7 +49,7 @@ nav{display:flex;gap:20px;color:var(--mut);font-size:14px}nav a:hover{color:var(
 .tag{font-size:13px;color:var(--acc2)}
 .sw{display:inline-flex;border:1px solid var(--line);border-radius:10px;padding:4px;margin-bottom:24px}
 .sw button{border:0;background:none;color:var(--mut);padding:8px 16px;border-radius:7px;cursor:pointer;font:500 14px Onest}
-.sw button.on{background:var(--acc);color:#04130c}
+.sw button.on{background:var(--text);color:var(--bg)}
 .calc{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
 .opts{display:grid;gap:10px}
 .opt{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer}
@@ -78,6 +78,7 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
   <a class="logo" href="#top">Gotovo<i>.</i></a>
   <nav><a href="#sites">Sites</a><a href="#bots">Bots</a><a href="#hosting">Hosting</a><a href="#calc">Calculator</a><a href="#faq">FAQ</a></nav><a href="/" style="margin-right:15px;color:var(--mut);">UK</a><a href="/en" style="margin-right:20px;color:var(--text);font-weight:bold;">EN</a>
   <button id="theme" aria-label="Toggle theme">◐</button>
+  <a class="btn" href="#contact" style="padding:8px 16px;font-size:14px;margin-left:10px;">Order</a>
   
 </div></header>
 
