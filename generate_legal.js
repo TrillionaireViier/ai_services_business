@@ -16,7 +16,7 @@ li{margin-bottom:10px;}
 footer{padding:30px 20px;text-align:center;color:var(--mut);font-size:14px;border-top:1px solid var(--line);margin-top:60px;}
 `;
 
-function makePage(lang, title, content, backLink, backText) {
+function makePage(lang, title, content, backLink, backText, pageSlug) {
   return `<!DOCTYPE html>
 <html lang="${lang}">
 <head>
@@ -29,15 +29,23 @@ function makePage(lang, title, content, backLink, backText) {
 <body>
 <header>
   <a href="${backLink}" class="logo">Gotovo<i>.</i></a>
-  <a href="${backLink}" style="margin-left:auto;color:var(--mut);text-decoration:none;">← ${backText}</a>
+  <div style="margin-left:auto;display:flex;align-items:center;">
+    <a href="/${pageSlug}" style="margin-right:15px;color:${lang === 'uk' ? 'var(--text)' : 'var(--mut)'};font-weight:${lang === 'uk' ? 'bold' : 'normal'};text-decoration:none;">UK</a>
+    <a href="/en/${pageSlug}" style="margin-right:20px;color:${lang === 'en' ? 'var(--text)' : 'var(--mut)'};font-weight:${lang === 'en' ? 'bold' : 'normal'};text-decoration:none;">EN</a>
+    <a href="${backLink}" style="color:var(--mut);text-decoration:none;">← ${backText}</a>
+  </div>
 </header>
 <div class="container">
   <h1>${title}</h1>
   ${content}
 </div>
 <footer>
-  <div class="container">
-    © 2026 Gotovo. ${lang === 'uk' ? 'Усі права захищено.' : 'All rights reserved.'}
+  <div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;">
+    <div>© 2026 Gotovo. ${lang === 'uk' ? 'Усі права захищено.' : 'All rights reserved.'}</div>
+    <div style="display:flex;gap:20px;font-size:13px;">
+      <a href="${lang === 'uk' ? '/privacy' : '/en/privacy'}" style="text-decoration:underline;">${lang === 'uk' ? 'Політика конфіденційності' : 'Privacy Policy'}</a>
+      <a href="${lang === 'uk' ? '/terms' : '/en/terms'}" style="text-decoration:underline;">${lang === 'uk' ? 'Умови використання' : 'Terms of Service'}</a>
+    </div>
   </div>
 </footer>
 </body>
@@ -110,12 +118,12 @@ const termsEn = `
   <p>The Contractor guarantees the operability of the created product. Free technical support and bug fixing are provided for 30 days after project delivery (or for a year if an additional support package is ordered).</p>
 `;
 
-fs.writeFileSync('privacy.html', makePage('uk', 'Політика конфіденційності', privacyUk, '/', 'Назад на головну'));
-fs.writeFileSync('terms.html', makePage('uk', 'Договір публічної оферти', termsUk, '/', 'Назад на головну'));
+fs.writeFileSync('privacy.html', makePage('uk', 'Політика конфіденційності', privacyUk, '/', 'Назад на головну', 'privacy'));
+fs.writeFileSync('terms.html', makePage('uk', 'Договір публічної оферти', termsUk, '/', 'Назад на головну', 'terms'));
 
 if (!fs.existsSync('en')) fs.mkdirSync('en');
-fs.writeFileSync('en/privacy.html', makePage('en', 'Privacy Policy', privacyEn, '/en', 'Back to home'));
-fs.writeFileSync('en/terms.html', makePage('en', 'Terms of Service', termsEn, '/en', 'Back to home'));
+fs.writeFileSync('en/privacy.html', makePage('en', 'Privacy Policy', privacyEn, '/en', 'Back to home', 'privacy'));
+fs.writeFileSync('en/terms.html', makePage('en', 'Terms of Service', termsEn, '/en', 'Back to home', 'terms'));
 
 function replaceFooterLinks(file, pText, pLink, tText, tLink) {
   if (!fs.existsSync(file)) return;

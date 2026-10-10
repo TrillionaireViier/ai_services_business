@@ -74,9 +74,9 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
 </head>
 <body>
 <header><div class="wrap">
-  <a class="logo" href="#top">Готово<i>.</i></a>
+  <a class="logo" href="#top">Gotovo<i>.</i></a>
   <nav><a href="#sites">Sites</a><a href="#bots">Bots</a><a href="#hosting">Hosting</a><a href="#calc">Calculator</a><a href="#faq">FAQ</a></nav><a href="/" style="margin-right:15px;color:var(--mut);">UK</a><a href="/en" style="margin-right:20px;color:var(--text);font-weight:bold;">EN</a>
-  <button id="theme" aria-label="Змінити тему">◐</button>
+  <button id="theme" aria-label="Toggle theme">◐</button>
   <a class="btn" href="#contact">Order</a>
 </div></header>
 
@@ -108,12 +108,12 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
 <section id="hosting"><div class="wrap">
   <h2>Hassle-free hosting and domain</h2>
   <p class="lead">Fast servers, SSL, daily backups and tech support. Pay monthly or yearly and save 20%.</p>
-  <div class="sw" role="group" aria-label="Період оплати"><button class="on" data-p="m">Monthly</button><button data-p="y">Yearly -20%</button></div>
+  <div class="sw" role="group" aria-label="Billing period"><button class="on" data-p="m">Monthly</button><button data-p="y">Yearly -20%</button></div>
   <div class="grid" id="hostGrid"></div>
 </div></section>
 
 <section id="calc"><div class="wrap">
-  <h2>Calculator вартості</h2>
+  <h2>Cost Calculator</h2>
   <p class="lead">Select what you need, and the sum calculates instantly. Final price confirmed after a short call.</p>
   <div class="calc">
     <div class="opts" id="opts"></div>
@@ -130,7 +130,7 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
   <h2>Cases</h2>
   <p class="lead">Some projects we launched for clients.</p>
   <div class="grid">
-    <a href="/en/case-0" class="card port" style="text-decoration:none;transition:transform 0.2s;"><div class="shot"></div><h3>Coffee Shop "Zerno"</h3><p>Інтернет-магазин з оплатою онлайн. Запуск за 6 днів, перші замовлення в день старту.</p></a>
+    <a href="/en/case-0" class="card port" style="text-decoration:none;transition:transform 0.2s;"><div class="shot"></div><h3>Coffee Shop "Zerno"</h3><p>Online store with online payments. Launched in 6 days, first orders on launch day.</p></a>
     <div class="card port"><div class="shot" style="filter:hue-rotate(60deg)"></div><h3>Barbershop "Boroda"</h3><p>Landing page with Telegram bot booking. Admin no longer sits on the phone.</p></div>
     <div class="card port"><div class="shot" style="filter:hue-rotate(160deg)"></div><h3>Logistics Company</h3><p>Corporate site with CRM integration. Leads go straight to managers.</p></div>
   </div>
@@ -164,7 +164,7 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
   <form id="leadForm" class="card">
     <input type="text" name="name" placeholder="Name" required autocomplete="name">
     <input type="tel" name="phone" placeholder="Phone or @telegram" required>
-    <select name="service"><option>Готовий сайт</option><option>Чат-бот</option><option>Hosting і домен</option><option>Додаткові послуги</option></select>
+    <select name="service"><option>Turnkey Website</option><option>Chatbot</option><option>Hosting & Domain</option><option>Additional Services</option></select>
     <textarea name="msg" rows="3" placeholder="Briefly about your project"></textarea>
     <button class="btn" type="submit">Send Request</button>
     <p class="ok" id="formOk" hidden>Thank you! We will contact you shortly.</p>
@@ -174,7 +174,7 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
 
 <footer>
   <div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;">
-    <div>© 2026 Готово. Усі права захищено.</div>
+    <div>© 2026 Gotovo. All rights reserved.</div>
     <div style="display:flex;gap:20px;font-size:13px;">
       <a href="/en/privacy" style="text-decoration:underline;">Privacy Policy</a>
       <a href="/en/terms" style="text-decoration:underline;">Terms of Service</a>
@@ -248,7 +248,7 @@ document.querySelectorAll('.sw button').forEach(b=>b.onclick=()=>{
  document.querySelectorAll('.sw button').forEach(o=>o.classList.toggle('on',o===b));
  renderHost(b.dataset.p);
 });
-// калькулятор
+// calculator
 $('#opts').innerHTML=addons.map((a,i)=>`<label class="opt"><input type="checkbox" data-i="${i}"><span>${a[0]}</span><em>${fmt(a[1])}</em></label>`).join('');
 function calc(){
  const on=[...document.querySelectorAll('#opts input:checked')].map(c=>addons[c.dataset.i]);
@@ -257,14 +257,14 @@ function calc(){
  return on;
 }
 $('#opts').addEventListener('change',calc);
-// модальне вікно
+// modal window
 const modal=$('#modal');
 function openModal(title,info){
  $('#mTitle').textContent=title;$('#mInfo').textContent=info;$('#mOk').hidden=true;modal.showModal();
 }
 document.addEventListener('click',e=>{
  const b=e.target.closest('[data-order]');
- if(b)openModal('Order: '+b.dataset.order,'Вартість: '+b.dataset.price);
+ if(b)openModal('Order: '+b.dataset.order,'Cost: '+b.dataset.price);
 });
 $('#sendCalc').onclick=()=>{
  const on=calc();
@@ -274,13 +274,13 @@ $('#sendCalc').onclick=()=>{
 $('#orderForm').addEventListener('submit',e=>{
  if(e.submitter&&e.submitter.value==='ok'){
   e.preventDefault();$('#mOk').hidden=false;
-  setTimeout(()=>modal.close(),1500); // TODO: надсилання на ваш бекенд або в Telegram-бота
+  setTimeout(()=>modal.close(),1500); // TODO: send to backend or Telegram bot
  }
 });
 $('#leadForm').addEventListener('submit',e=>{
- e.preventDefault();$('#formOk').hidden=false;e.target.reset(); // TODO: підключіть бекенд
+ e.preventDefault();$('#formOk').hidden=false;e.target.reset(); // TODO: connect backend
 });
-// тема
+// theme
 $('#theme').onclick=()=>{
  const r=document.documentElement;
  r.dataset.theme=r.dataset.theme==='light'?'dark':'light';

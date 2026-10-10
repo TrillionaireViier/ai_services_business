@@ -23,7 +23,7 @@ h2{font-size:28px;}
 footer{padding:30px 20px;text-align:center;color:var(--mut);font-size:14px;}
 `;
 
-function makeCase(lang, data, t) {
+function makeCase(lang, data, t, id) {
   return `<!DOCTYPE html>
 <html lang="${lang}">
 <head>
@@ -36,7 +36,11 @@ function makeCase(lang, data, t) {
 <body>
 <header>
   <a href="${t.homeLink}" class="logo">Gotovo<i>.</i></a>
-  <a href="${t.homeLink}" style="margin-left:auto;color:var(--mut);text-decoration:none;">← ${t.back}</a>
+  <div style="margin-left:auto;display:flex;align-items:center;">
+    <a href="/case-${id}" style="margin-right:15px;color:${lang === 'uk' ? 'var(--text)' : 'var(--mut)'};font-weight:${lang === 'uk' ? 'bold' : 'normal'};text-decoration:none;">UK</a>
+    <a href="/en/case-${id}" style="margin-right:20px;color:${lang === 'en' ? 'var(--text)' : 'var(--mut)'};font-weight:${lang === 'en' ? 'bold' : 'normal'};text-decoration:none;">EN</a>
+    <a href="${t.homeLink}" style="color:var(--mut);text-decoration:none;">← ${t.back}</a>
+  </div>
 </header>
 
 <section style="padding-top:80px;padding-bottom:80px;background:var(--panel);">
@@ -85,8 +89,12 @@ function makeCase(lang, data, t) {
 </section>
 
 <footer>
-  <div class="container">
-    © 2026 Gotovo. ${t.allRights}
+  <div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;">
+    <div>© 2026 Gotovo. ${t.allRights}</div>
+    <div style="display:flex;gap:20px;font-size:13px;">
+      <a href="${lang === 'uk' ? '/privacy' : '/en/privacy'}" style="text-decoration:underline;">${lang === 'uk' ? 'Політика конфіденційності' : 'Privacy Policy'}</a>
+      <a href="${lang === 'uk' ? '/terms' : '/en/terms'}" style="text-decoration:underline;">${lang === 'uk' ? 'Умови використання' : 'Terms of Service'}</a>
+    </div>
   </div>
 </footer>
 </body>
@@ -149,9 +157,9 @@ const casesEn = [
   }
 ];
 
-casesUk.forEach((c, i) => fs.writeFileSync(`case-${i}.html`, makeCase('uk', c, tUk)));
+casesUk.forEach((c, i) => fs.writeFileSync(`case-${i}.html`, makeCase('uk', c, tUk, i)));
 if (!fs.existsSync('en')) fs.mkdirSync('en');
-casesEn.forEach((c, i) => fs.writeFileSync(`en/case-${i}.html`, makeCase('en', c, tEn)));
+casesEn.forEach((c, i) => fs.writeFileSync(`en/case-${i}.html`, makeCase('en', c, tEn, i)));
 
 console.log('Cases generated');
 
