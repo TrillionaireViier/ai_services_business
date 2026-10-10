@@ -771,35 +771,45 @@ textarea.input-control {
       </button>
     </div>
 
-    <!-- Mode D Discovery Radar -->
-    <div class="panel-header" style="margin-top:10px;">
-      <div class="panel-title">📡 Mode D: Discovery Radar</div>
-      <span style="font-size:10px;color:var(--green);font-family:'JetBrains Mono';">TOP RANKED</span>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:8px;">
-      <div class="trend-card" onclick="selectTrend('Formula 1 Digital Simulators Investment')">
-        <div class="trend-header">
-          <span class="trend-score">SCORE: 9.4/10</span>
-          <span style="font-size:10px;color:var(--orange);">F1 SPORTS</span>
+    <!-- Mode D Discovery Radar Panel -->
+    <div id="formModeD" class="input-group" style="display:none;margin-top:10px;">
+      <div class="panel-header">
+        <div class="panel-title">📡 Mode D: Discovery Radar</div>
+        <span style="font-size:10px;color:var(--green);font-family:'JetBrains Mono';">TOP RANKED TRENDS</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="trend-card" onclick="selectTrend('Formula 1 Digital Simulators Investment')">
+          <div class="trend-header">
+            <span class="trend-score">SCORE: 9.4/10</span>
+            <span style="font-size:10px;color:var(--orange);">F1 SPORTS</span>
+          </div>
+          <div class="trend-topic">Why F1 Teams Invest Millions in Digital Simulators</div>
+          <div class="score-bars">
+            <div class="bar-item">Fresh<div class="bar-val"><div class="bar-fill" style="width:92%;"></div></div></div>
+            <div class="bar-item">Velocity<div class="bar-val"><div class="bar-fill" style="width:95%;"></div></div></div>
+            <div class="bar-item">Curiosity<div class="bar-val"><div class="bar-fill" style="width:96%;"></div></div></div>
+            <div class="bar-item">Visual<div class="bar-val"><div class="bar-fill" style="width:94%;"></div></div></div>
+          </div>
         </div>
-        <div class="trend-topic">Why F1 Teams Invest Millions in Digital Simulators</div>
-        <div class="score-bars">
-          <div class="bar-item">Fresh<div class="bar-val"><div class="bar-fill" style="width:92%;"></div></div></div>
-          <div class="bar-item">Velocity<div class="bar-val"><div class="bar-fill" style="width:95%;"></div></div></div>
-          <div class="bar-item">Curiosity<div class="bar-val"><div class="bar-fill" style="width:96%;"></div></div></div>
-          <div class="bar-item">Visual<div class="bar-val"><div class="bar-fill" style="width:94%;"></div></div></div>
+
+        <div class="trend-card" onclick="selectTrend('Quantum Computing Security Threat')">
+          <div class="trend-header">
+            <span class="trend-score">SCORE: 9.1/10</span>
+            <span style="font-size:10px;color:var(--cyan);">TECH NEWS</span>
+          </div>
+          <div class="trend-topic">1,000-Qubit Processor Solves RSA-2048 in Seconds</div>
+          <div class="score-bars">
+            <div class="bar-item">Fresh<div class="bar-val"><div class="bar-fill" style="width:90%;"></div></div></div>
+            <div class="bar-item">Velocity<div class="bar-val"><div class="bar-fill" style="width:88%;"></div></div></div>
+            <div class="bar-item">Curiosity<div class="bar-val"><div class="bar-fill" style="width:94%;"></div></div></div>
+            <div class="bar-item">Visual<div class="bar-val"><div class="bar-fill" style="width:91%;"></div></div></div>
+          </div>
         </div>
       </div>
-
-      <div class="trend-card" onclick="selectTrend('Quantum Computing Security Threat')">
-        <div class="trend-header">
-          <span class="trend-score">SCORE: 9.1/10</span>
-          <span style="font-size:10px;color:var(--cyan);">TECH NEWS</span>
-        </div>
-        <div class="trend-topic">1,000-Qubit Processor Solves RSA-2048 in Seconds</div>
-        <div class="score-bars">
-          <div class="bar-item">Fresh<div class="bar-val"><div class="bar-fill" style="width:90%;"></div></div></div>
-          <div class="bar-item">Velocity<div class="bar-val"><div class="bar-fill" style="width:88%;"></div></div></div>
+      <button class="btn-produce" style="background:linear-gradient(135deg, var(--green), #059669);margin-top:6px;" onclick="selectTrend('Formula 1 Digital Simulators Investment')">
+        📡 SELECT TOP TREND & PRODUCE
+      </button>
+    </div>
           <div class="bar-item">Curiosity<div class="bar-val"><div class="bar-fill" style="width:94%;"></div></div></div>
           <div class="bar-item">Visual<div class="bar-val"><div class="bar-fill" style="width:92%;"></div></div></div>
         </div>
@@ -972,6 +982,7 @@ function switchMode(mode) {
   document.getElementById('formModeA').style.display = mode === 'A' ? 'flex' : 'none';
   document.getElementById('formModeB').style.display = mode === 'B' ? 'flex' : 'none';
   document.getElementById('formModeC').style.display = mode === 'C' ? 'flex' : 'none';
+  document.getElementById('formModeD').style.display = mode === 'D' ? 'flex' : 'none';
 
   log('Switched to Mode ' + mode);
 }
