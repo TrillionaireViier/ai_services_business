@@ -194,8 +194,8 @@ function getTemplate(lang, t) {
   <div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;">
     <div>© 2026 Gotovo. ${t.allRights}</div>
     <div style="display:flex;gap:20px;font-size:13px;">
-      <a href="{{PRIVACY_LINK}}" style="text-decoration:underline;">{{PRIVACY_TEXT}}</a>
-      <a href="{{TERMS_LINK}}" style="text-decoration:underline;">{{TERMS_TEXT}}</a>
+      <a href="{{PRIVACY_LINK}}" style="color:#ffffff;text-decoration:underline;">{{PRIVACY_TEXT}}</a>
+      <a href="{{TERMS_LINK}}" style="color:#ffffff;text-decoration:underline;">{{TERMS_TEXT}}</a>
     </div>
   </div>
 </footer>

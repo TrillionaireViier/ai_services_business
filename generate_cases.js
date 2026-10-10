@@ -92,8 +92,8 @@ function makeCase(lang, data, t, id) {
   <div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;">
     <div>© 2026 Gotovo. ${t.allRights}</div>
     <div style="display:flex;gap:20px;font-size:13px;">
-      <a href="${lang === 'uk' ? '/privacy' : '/en/privacy'}" style="text-decoration:underline;">${lang === 'uk' ? 'Політика конфіденційності' : 'Privacy Policy'}</a>
-      <a href="${lang === 'uk' ? '/terms' : '/en/terms'}" style="text-decoration:underline;">${lang === 'uk' ? 'Умови використання' : 'Terms of Service'}</a>
+      <a href="${lang === 'uk' ? '/privacy' : '/en/privacy'}" style="color:#ffffff;text-decoration:underline;">${lang === 'uk' ? 'Політика конфіденційності' : 'Privacy Policy'}</a>
+      <a href="${lang === 'uk' ? '/terms' : '/en/terms'}" style="color:#ffffff;text-decoration:underline;">${lang === 'uk' ? 'Умови використання' : 'Terms of Service'}</a>
     </div>
   </div>
 </footer>
