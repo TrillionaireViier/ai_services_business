@@ -106,7 +106,7 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
 </div></section>
 
 <section id="hosting"><div class="wrap">
-  <h2>Hosting і домен без головного болю</h2>
+  <h2>Hassle-free hosting and domain</h2>
   <p class="lead">Fast servers, SSL, daily backups and tech support. Pay monthly or yearly and save 20%.</p>
   <div class="sw" role="group" aria-label="Період оплати"><button class="on" data-p="m">Monthly</button><button data-p="y">Yearly -20%</button></div>
   <div class="grid" id="hostGrid"></div>
@@ -148,17 +148,17 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
 
 <section id="faq"><div class="wrap">
   <h2>FAQ</h2><div style="height:20px"></div>
-  <details><summary>Що буде після покупки?</summary><p>Ми передаємо доступи, показуємо, як редагувати сайт, і 30 daysв безкоштовно виправляємо помилки.</p></details>
-  <details><summary>Чи можна змінити дизайн під мій бренд?</summary><p>Так. Кольори, шрифти й логотип входять у кожен пакет. Повністю індивідуальний дизайн замовляється окремо.</p></details>
-  <details><summary>Хто володіє сайтом і доменом?</summary><p>Ви. Домен реєструється на вас, а код сайту можна забрати в будь-який момент.</p></details>
-  <details><summary>Як відбувається оплата?</summary><p>50% на старті, 50% після погодження готового сайту. Приймаємо картки та безготівковий розрахунок.</p></details>
-  <details><summary>Що, якщо мені потрібні зміни пізніше?</summary><p>Дрібні правки робимо в межах підтримки. Для великих доробок узгоджуємо окрему вартість заздалегідь.</p></details>
+  <details><summary>What happens after purchase?</summary><p>We provide access, show how to edit the site, and fix bugs for free for 30 days.</p></details>
+  <details><summary>Can I change the design to fit my brand?</summary><p>Yes. Colors, fonts, and logo are included in every package. Fully custom design is ordered separately.</p></details>
+  <details><summary>Who owns the site and domain?</summary><p>You do. The domain is registered to you, and the site code can be taken at any time.</p></details>
+  <details><summary>How does payment work?</summary><p>50% at the start, 50% after approval of the finished site. We accept cards and bank transfers.</p></details>
+  <details><summary>What if I need changes later?</summary><p>Minor edits are done within support. For major improvements, we agree on a separate cost in advance.</p></details>
 </div></section>
 
 <section id="contact"><div class="wrap contact">
   <div>
     <h2>Leave a request</h2>
-    <p class="lead">Передзвонимо або напишемо в месенджері протягом години в робочий час (пн–пт, 9:00–19:00).</p>
+    <p class="lead">We will call back or text in messenger within an hour during business hours (Mon-Fri, 9:00-19:00).</p>
     <div class="row"><a class="btn ghost" href="https://t.me/your_studio" target="_blank" rel="noopener">Telegram</a><a class="btn ghost" href="mailto:hello@gotovo.example">hello@gotovo.example</a></div>
   </div>
   <form id="leadForm" class="card">
@@ -167,7 +167,7 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
     <select name="service"><option>Готовий сайт</option><option>Чат-бот</option><option>Hosting і домен</option><option>Додаткові послуги</option></select>
     <textarea name="msg" rows="3" placeholder="Briefly about your project"></textarea>
     <button class="btn" type="submit">Send Request</button>
-    <p class="ok" id="formOk" hidden>Дякуємо! Ми зв'яжемося з вами найближчим часом.</p>
+    <p class="ok" id="formOk" hidden>Thank you! We will contact you shortly.</p>
   </form>
 </div></section>
 </main>
@@ -189,50 +189,13 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
     <input type="text" placeholder="Name" required>
     <input type="tel" placeholder="Phone or @telegram" required>
     <div class="row"><button class="btn" value="ok">Send</button><button class="btn ghost" value="cancel" formnovalidate>Cancel</button></div>
-    <p class="ok" id="mOk" hidden>Заявку прийнято. Ми скоро напишемо.</p>
+    <p class="ok" id="mOk" hidden>Request accepted. We will reply shortly.</p>
   </form>
 </dialog>
 
 <script>
-const fmt=n=>n.toLocaleString('uk-UA')+' ₴';
-const sites=[
- {n:'Візитка',d:'Одна сторінка про вас і ваші послуги.',p:3900,t:'3 days',f:['До 5 блоків','Форма заявки','Адаптивний дизайн']},
- {n:'Лендинг',d:'Продаючий сайт під одну пропозицію.',p:7900,t:'5 daysв',f:['До 10 блоків','Аналітика й піксель','Швидке завантаження'],hot:1},
- {n:'Корпоративний сайт',d:'Повноцінний сайт компанії.',p:14900,t:'7 daysв',f:['До 8 сторінок','Блог і новини','Базове SEO']},
- {n:'Інтернет-магазин',d:'Каталог, кошик і онлайн-оплата.',p:19900,t:'10 daysв',f:['До 100 товарів','Оплата карткою','Адмін-панель']}
-];
-const bots=[
- {n:'Автовідповідач',d:'Відповідає на типові питання 24/7.',p:2900,t:'2 days',f:['Меню та FAQ','Збір контактів','Telegram або Viber']},
- {n:'Бот для заявок і оплат',d:'Приймає замовлення й гроші.',p:6900,t:'5 daysв',f:['Каталог і кошик','Приймання оплат','Сповіщення менеджеру'],hot:1},
- {n:'Бот з CRM-інтеграцією',d:'Автоматизація продажів і процесів.',p:12900,t:'from 7 daysв',f:['Інтеграція з CRM','Розсилки й сегменти','Звіти для команди']},
- {n:'Бот-меню ресторану',d:'Онлайн замовлення страв та доставка.',p:5500,t:'4 days',f:['Вітрина страв','Інтеграція з кур`єрами','Знижки та промокоди']},
- {n:'Бот техпідтримки (Helpdesk)',d:'Система тікетів для підтримки клієнтів.',p:7500,t:'6 daysв',f:['Створення тікетів','Перехід на оператора','Історія звернень']},
- {n:'Бот для запису (Салони/СТО)',d:'Автоматизація бронювання часу.',p:8900,t:'7 daysв',f:['Календар записів','Нагадування клієнтам','Адмін-панель']},
- {n:'Крипто-бот',d:'Інтеграція з крипто-платежами та курсами.',p:15000,t:'10 daysв',f:['Прийом USDT/BTC','Курси валют онлайн','P2P обмінник']},
- {n:'Бот-вікторина (Квіз)',d:'Генерація лідів через гейміфікацію.',p:4500,t:'3 days',f:['Інтерактивні тести','Збір email/телефонів','Видача бонусів']},
- {n:'Бот для інфобізнесу',d:'Платформа для проведення курсів.',p:11500,t:'8 daysв',f:['Видача уроків','Тестування учнів','Оплата курсів']},
- {n:'Бот-магазин (Web App)',d:'Повноцінний інтернет-магазин у Telegram.',p:14500,t:'10 daysв',f:['Telegram Mini App','Кошик та еквайринг','Синхронізація складу'],hot:1},
- {n:'Бот-розсильник',d:'Масові розсилки повідомлень.',p:3500,t:'2 days',f:['Сегментація аудиторії','Відкладені повідомлення','Аналітика прочитань']},
- {n:'Бот для HR / Рекрутингу',d:'Анкетування та онбординг персоналу.',p:6500,t:'5 daysв',f:['Збір резюме','Тестування кандидатів','База співробітників']},
- {n:'Бот-афіша / Івенти',d:'Продаж квитків на події.',p:9900,t:'7 daysв',f:['Розклад подій','QR-квитки','Нагадування про подію']},
- {n:'Бот для нерухомості',d:'Пошук та оренда житла.',p:10500,t:'8 daysв',f:['Фільтри (ціна/район)','Галерея фото','Прямий зв`язок з ріелтором']},
- {n:'Бот фітнес-тренера',d:'Програми тренувань та харчування.',p:5900,t:'5 daysв',f:['Calculator калорій','Відео-уроки','Трекінг прогресу']},
- {n:'Бот-перекладач спільнот',d:'Автоматичний переклад у чатах.',p:4000,t:'3 days',f:['Підтримка 50+ мов','Модерація чату','Переклад на льоту']},
- {n:'Бот таск-менеджер',d:'Управління завданнями для команди.',p:8000,t:'6 daysв',f:['Створення задач','Дедлайни та статуси','Сповіщення учасників']},
- {n:'Бот бронювання готелів',d:'Перевірка номерів та бронювання.',p:11000,t:'7 daysв',f:['Вибір дат та номерів','Синхронізація броней','Онлайн оплата']},
- {n:'Закритий клуб (Підписка)',d:'Приватний доступ за підпискою.',p:7900,t:'5 daysв',f:['Рекурентні платежі','Авто-видалення боржників','Статистика клубу'],hot:1},
- {n:'AI-бот (ChatGPT)',d:'Розумний ШІ-асистент для бізнесу.',p:18000,t:'14 daysв',f:['Навчання на вашій базі','Генерація відповідей','Аналіз настрою клієнтів']}
-];
-const hosts=[
- {n:'Старт',m:150,f:['10 ГБ NVMe','1 сайт','SSL і бекапи']},
- {n:'Бізнес',m:300,f:['30 ГБ NVMe','5 сайтів','Пріоритетна підтримка'],hot:1},
- {n:'Максимум',m:700,f:['100 ГБ NVMe','Без обмежень','Виділені ресурси']}
-];
-const addons=[
- ['Готовий сайт: лендинг',7900],['Готовий сайт: інтернет-магазин',19900],['Telegram-бот',6900],
- ['SEO-оптимізація',4500],['Підключення платіжної системи',2500],['Індивідуальний дизайн',9900],
- ['Налаштування реклами',3500],['Hosting на рік (Бізнес)',2880]
-];
+
+const fmt=n=>'
 const $=s=>document.querySelector(s);
 const card=(x,price,sub,id)=>`<div class="card${x.hot?' hot':''}"><h3>${x.n}</h3>${x.d?`<p>${x.d}</p>`:''}${x.t?`<span class="tag">Launch: ${x.t}</span>`:''}<ul>${x.f.map(i=>`<li>${i}</li>`).join('')}</ul><div class="price">${price}<small>${sub||''}</small></div><div style="display:flex;flex-direction:column;gap:8px;margin-top:auto;"><button class="btn${x.hot?'':' ghost'}" data-order="${x.n}" data-price="${price}">Order</button><a href="service-${id}" class="btn ghost" style="padding:6px;border:none;text-decoration:underline;font-size:13px;color:var(--mut);text-align:center;">Learn More</a></div></div>`;
 $('#siteGrid').innerHTML=sites.map((x,i)=>card(x,fmt(x.p),' / fixed', i)).join('');
@@ -268,8 +231,101 @@ document.addEventListener('click',e=>{
 });
 $('#sendCalc').onclick=()=>{
  const on=calc();
- if(!on.length){$('#sum').textContent='Оберіть хоча б одну послугу';return}
- openModal('Ваш розрахунок',on.map(a=>a[0]).join(', ')+'. Разом: '+$('#sum').textContent);
+ if(!on.length){$('#sum').textContent='Select at least one service';return}
+ openModal('Your calculation',on.map(a=>a[0]).join(', ')+'. Total: '+$('#sum').textContent);
+};
+$('#orderForm').addEventListener('submit',e=>{
+ if(e.submitter&&e.submitter.value==='ok'){
+  e.preventDefault();$('#mOk').hidden=false;
+  setTimeout(()=>modal.close(),1500); // TODO: надсилання на ваш бекенд або в Telegram-бота
+ }
+});
+$('#leadForm').addEventListener('submit',e=>{
+ e.preventDefault();$('#formOk').hidden=false;e.target.reset(); // TODO: підключіть бекенд
+});
+// тема
+$('#theme').onclick=()=>{
+ const r=document.documentElement;
+ r.dataset.theme=r.dataset.theme==='light'?'dark':'light';
+};
+</script>
+</body>
+</html>+n;
+const sites=[
+ {n:'Business Card',d:'One page about you and your services.',p:99,t:'3 days',f:['Up to 5 blocks','Contact form','Responsive design']},
+ {n:'Landing Page',d:'Sales page for a single offer.',p:199,t:'5 days',f:['Up to 10 blocks','Analytics & Pixel','Fast loading'],hot:1},
+ {n:'Corporate Site',d:'Full-fledged company website.',p:375,t:'7 days',f:['Up to 8 pages','Blog & News','Basic SEO']},
+ {n:'Online Store',d:'Catalog, cart, and online payment.',p:499,t:'10 days',f:['Up to 100 products','Card payment','Admin panel']}
+];
+const bots=[
+ {n:'Autoresponder',d:'Answers FAQs 24/7.',p:75,t:'2 days',f:['Menu & FAQ','Lead generation','Telegram or Viber']},
+ {n:'Order & Payment Bot',d:'Accepts orders and money.',p:175,t:'5 days',f:['Catalog & cart','Accept payments','Manager alerts'],hot:1},
+ {n:'CRM Integration Bot',d:'Automates sales and processes.',p:325,t:'from 7 days',f:['CRM integration','Broadcasts & segments','Team reports']},
+ {n:'Restaurant Menu Bot',d:'Online food ordering & delivery.',p:139,t:'4 days',f:['Food catalog','Courier integration','Discounts & promo']},
+ {n:'Helpdesk Bot',d:'Ticket system for customer support.',p:189,t:'6 days',f:['Create tickets','Switch to agent','Request history']},
+ {n:'Booking Bot',d:'Automates time booking.',p:225,t:'7 days',f:['Booking calendar','Client reminders','Admin panel']},
+ {n:'Crypto Bot',d:'Crypto payments and live rates.',p:375,t:'10 days',f:['Accept USDT/BTC','Live rates','P2P exchange']},
+ {n:'Quiz Bot',d:'Lead generation through gamification.',p:115,t:'3 days',f:['Interactive tests','Collect email/phone','Issue bonuses']},
+ {n:'Course Bot',d:'Platform for conducting courses.',p:289,t:'8 days',f:['Issue lessons','Student testing','Course payments']},
+ {n:'Web App Store',d:'Full online store in Telegram.',p:365,t:'10 days',f:['Telegram Mini App','Cart & acquiring','Inventory sync'],hot:1},
+ {n:'Broadcast Bot',d:'Mass message broadcasting.',p:89,t:'2 days',f:['Audience segmentation','Scheduled messages','Read analytics']},
+ {n:'HR & Recruiting Bot',d:'Questionnaires and onboarding.',p:165,t:'5 days',f:['Collect CVs','Candidate testing','Employee DB']},
+ {n:'Event Bot',d:'Ticket sales for events.',p:249,t:'7 days',f:['Event schedule','QR tickets','Event reminders']},
+ {n:'Real Estate Bot',d:'Search and rent properties.',p:265,t:'8 days',f:['Filters (price/area)','Photo gallery','Direct contact to agent']},
+ {n:'Fitness Bot',d:'Training and nutrition programs.',p:149,t:'5 days',f:['Calorie calculator','Video lessons','Progress tracking']},
+ {n:'Translator Bot',d:'Automatic translation in chats.',p:99,t:'3 days',f:['Supports 50+ languages','Chat moderation','Live translation']},
+ {n:'Task Manager Bot',d:'Task management for the team.',p:199,t:'6 days',f:['Create tasks','Deadlines & status','Member alerts']},
+ {n:'Hotel Booking Bot',d:'Check rooms and book.',p:275,t:'7 days',f:['Select dates & rooms','Booking sync','Online payment']},
+ {n:'Private Club (Sub)',d:'Private access by subscription.',p:199,t:'5 days',f:['Recurring payments','Auto-kick debtors','Club stats'],hot:1},
+ {n:'AI Assistant (ChatGPT)',d:'Smart AI assistant for business.',p:450,t:'14 days',f:['Trained on your DB','Generate answers','Client mood analysis']}
+];
+const hosts=[
+ {n:'Start',m:4,f:['10 GB NVMe','1 site','SSL & backups']},
+ {n:'Business',m:8,f:['30 GB NVMe','5 sites','Priority support'],hot:1},
+ {n:'Maximum',m:18,f:['100 GB NVMe','Unlimited sites','Dedicated resources']}
+];
+const addons=[
+ ['Basic SEO',50],['Logo Design',75],['Copywriting (per page)',25],
+ ['CRM Setup',125],['Ad Setup',89],['Yearly Hosting (Business)',72]
+];
+
+const $=s=>document.querySelector(s);
+const card=(x,price,sub,id)=>`<div class="card${x.hot?' hot':''}"><h3>${x.n}</h3>${x.d?`<p>${x.d}</p>`:''}${x.t?`<span class="tag">Launch: ${x.t}</span>`:''}<ul>${x.f.map(i=>`<li>${i}</li>`).join('')}</ul><div class="price">${price}<small>${sub||''}</small></div><div style="display:flex;flex-direction:column;gap:8px;margin-top:auto;"><button class="btn${x.hot?'':' ghost'}" data-order="${x.n}" data-price="${price}">Order</button><a href="service-${id}" class="btn ghost" style="padding:6px;border:none;text-decoration:underline;font-size:13px;color:var(--mut);text-align:center;">Learn More</a></div></div>`;
+$('#siteGrid').innerHTML=sites.map((x,i)=>card(x,fmt(x.p),' / fixed', i)).join('');
+$('#botGrid').innerHTML=bots.map((x,i)=>card(x,'from '+fmt(x.p),'', i+4)).join('');
+function renderHost(p){
+ $('#hostGrid').innerHTML=hosts.map((x,i)=>{
+  const v=p==='y'?Math.round(x.m*12*.8):x.m;
+  return card(x,fmt(v),p==='y'?' / yr':' / mo', i+24);
+ }).join('');
+}
+renderHost('m');
+document.querySelectorAll('.sw button').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('.sw button').forEach(o=>o.classList.toggle('on',o===b));
+ renderHost(b.dataset.p);
+});
+// калькулятор
+$('#opts').innerHTML=addons.map((a,i)=>`<label class="opt"><input type="checkbox" data-i="${i}"><span>${a[0]}</span><em>${fmt(a[1])}</em></label>`).join('');
+function calc(){
+ const on=[...document.querySelectorAll('#opts input:checked')].map(c=>addons[c.dataset.i]);
+ $('#sum').textContent=fmt(on.reduce((s,a)=>s+a[1],0));
+ $('#picked').innerHTML=on.length?on.map(a=>`<li>${a[0]}</li>`).join(''):'<li>Nothing selected</li>';
+ return on;
+}
+$('#opts').addEventListener('change',calc);
+// модальне вікно
+const modal=$('#modal');
+function openModal(title,info){
+ $('#mTitle').textContent=title;$('#mInfo').textContent=info;$('#mOk').hidden=true;modal.showModal();
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-order]');
+ if(b)openModal('Order: '+b.dataset.order,'Вартість: '+b.dataset.price);
+});
+$('#sendCalc').onclick=()=>{
+ const on=calc();
+ if(!on.length){$('#sum').textContent='Select at least one service';return}
+ openModal('Your calculation',on.map(a=>a[0]).join(', ')+'. Total: '+$('#sum').textContent);
 };
 $('#orderForm').addEventListener('submit',e=>{
  if(e.submitter&&e.submitter.value==='ok'){
