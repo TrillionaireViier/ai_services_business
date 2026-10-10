@@ -46,8 +46,8 @@ function makePage(lang, title, content, backLink, backText, pageSlug) {
   <div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;">
     <div>© 2026 Gotovo. ${lang === 'uk' ? 'Усі права захищено.' : 'All rights reserved.'}</div>
     <div style="display:flex;gap:20px;font-size:13px;">
-      <a href="${lang === 'uk' ? '/privacy' : '/en/privacy'}" style="color:#ffffff;text-decoration:underline;">${lang === 'uk' ? 'Політика конфіденційності' : 'Privacy Policy'}</a>
-      <a href="${lang === 'uk' ? '/terms' : '/en/terms'}" style="color:#ffffff;text-decoration:underline;">${lang === 'uk' ? 'Умови використання' : 'Terms of Service'}</a>
+      <a href="${lang === 'uk' ? '/privacy' : '/en/privacy'}" style="color:var(--text);text-decoration:underline;">${lang === 'uk' ? 'Політика конфіденційності' : 'Privacy Policy'}</a>
+      <a href="${lang === 'uk' ? '/terms' : '/en/terms'}" style="color:var(--text);text-decoration:underline;">${lang === 'uk' ? 'Умови використання' : 'Terms of Service'}</a>
     </div>
   </div>
 </footer>
@@ -133,8 +133,8 @@ function replaceFooterLinks(file, pText, pLink, tText, tLink) {
   if (!fs.existsSync(file)) return;
   let c = fs.readFileSync(file, 'utf8');
   let newDiv = `<div style="display:flex;gap:20px;font-size:13px;">
-      <a href="${pLink}" style="color:#ffffff;text-decoration:underline;">${pText}</a>
-      <a href="${tLink}" style="color:#ffffff;text-decoration:underline;">${tText}</a>
+      <a href="${pLink}" style="color:var(--text);text-decoration:underline;">${pText}</a>
+      <a href="${tLink}" style="color:var(--text);text-decoration:underline;">${tText}</a>
     </div>`;
   
   c = c.replace(/<div style="display:flex;gap:20px;font-size:13px;">[\s\S]*?<\/div>/, newDiv);
