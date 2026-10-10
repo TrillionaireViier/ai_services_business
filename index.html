@@ -71,29 +71,489 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
 .ok{color:var(--acc);font-weight:600}
 @media(max-width:760px){nav{display:none}.calc,.contact{grid-template-columns:1fr}.total{position:static}section{padding:52px 0}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Futuristic OMNI AI Logistics Theme */
+:root {
+  --bg: #090d16;
+  --panel: rgba(15, 22, 36, 0.75);
+  --panel-solid: #0e1524;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-glow: rgba(0, 240, 255, 0.3);
+  --text: #f0f4fc;
+  --mut: #8e9bb4;
+  --cyan: #00f0ff;
+  --cyan-glow: rgba(0, 240, 255, 0.4);
+  --orange: #ff6b2b;
+  --orange-glow: rgba(255, 107, 43, 0.4);
+  --acc: #00f0ff;
+  --acc2: #ff6b2b;
+  --r: 16px;
+}
+[data-theme=light] {
+  --bg: #f5f8fc;
+  --panel: rgba(255, 255, 255, 0.85);
+  --panel-solid: #ffffff;
+  --line: #e1e8f5;
+  --line-glow: rgba(37, 99, 235, 0.3);
+  --text: #0b1329;
+  --mut: #506184;
+  --cyan: #0284c7;
+  --cyan-glow: rgba(2, 132, 199, 0.3);
+  --orange: #ea580c;
+  --orange-glow: rgba(234, 88, 12, 0.3);
+  --acc: #0284c7;
+  --acc2: #ea580c;
+}
+
+body {
+  background: var(--bg);
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 60%, rgba(255, 107, 43, 0.08) 0%, transparent 40%),
+    linear-gradient(to bottom, rgba(9, 13, 22, 0.95), var(--bg));
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: 'Onest', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Header Glass Navbar */
+header {
+  position: sticky;
+  top: 16px;
+  z-index: 100;
+  padding: 0 20px;
+  background: transparent;
+  border-bottom: none;
+}
+header .wrap {
+  background: rgba(13, 19, 32, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(0, 240, 255, 0.1);
+  padding: 8px 24px;
+  height: 64px;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+.logo-omni {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text);
+  text-decoration: none;
+}
+.logo-orb {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #00f0ff, #0052cc);
+  box-shadow: 0 0 15px var(--cyan-glow), inset 0 0 8px #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.logo-orb::after {
+  content: '';
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 240, 255, 0.6);
+  position: absolute;
+  animation: spinOrb 12s linear infinite;
+}
+@keyframes spinOrb { 100% { transform: rotate(360deg); } }
+
+nav a {
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--mut);
+  transition: all 0.2s;
+}
+nav a:hover {
+  color: var(--cyan);
+  text-shadow: 0 0 8px var(--cyan-glow);
+}
+
+.btn-orange-glow {
+  background: linear-gradient(135deg, rgba(255, 107, 43, 0.15), rgba(255, 107, 43, 0.3));
+  border: 1px solid var(--orange);
+  color: #ffffff !important;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 10px 22px;
+  border-radius: 30px;
+  box-shadow: 0 0 20px var(--orange-glow);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.btn-orange-glow:hover {
+  background: var(--orange);
+  color: #000000 !important;
+  box-shadow: 0 0 35px var(--orange-glow);
+  transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero-omni {
+  padding: 60px 0 40px;
+  position: relative;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+@media (max-width: 960px) {
+  .hero-grid { grid-template-columns: 1fr; }
+}
+
+.eyebrow-tag {
+  color: var(--orange);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow-tag::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--orange);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--orange-glow);
+}
+
+.hero-omni h1 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(32px, 4.2vw, 54px);
+  line-height: 1.15;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+.hero-omni h1 span {
+  background: linear-gradient(135deg, #ffffff, var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-omni p {
+  color: var(--mut);
+  font-size: 17px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 540px;
+}
+
+/* Hero Visual Diagram */
+.diagram-container {
+  background: rgba(13, 19, 32, 0.7);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 24px;
+  padding: 28px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 0 30px rgba(0, 240, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+.diagram-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.nodes-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 24px;
+}
+.node-card {
+  background: rgba(20, 29, 46, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 16px 12px;
+  text-align: center;
+  transition: all 0.3s;
+}
+.node-card:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 20px var(--cyan-glow);
+  transform: translateY(-4px);
+}
+.node-icon {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 10px;
+  border-radius: 10px;
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid var(--cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan-glow);
+}
+.node-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Vehicle Graphic Section */
+.vehicle-art {
+  background: linear-gradient(180deg, rgba(16, 24, 40, 0.9), rgba(8, 12, 20, 0.95));
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.autopilot-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 12px;
+}
+.autopilot-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.status-dots {
+  display: flex;
+  gap: 6px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.dot.orange { background: var(--orange); box-shadow: 0 0 8px var(--orange-glow); }
+.dot.cyan { background: var(--cyan); box-shadow: 0 0 8px var(--cyan-glow); }
+.dot.green { background: #10b981; box-shadow: 0 0 8px #10b981; }
+
+.pills-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.pill-badge {
+  background: rgba(255, 107, 43, 0.15);
+  border: 1px solid rgba(255, 107, 43, 0.4);
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Logos Marquee Strip */
+.logos-strip {
+  margin-top: 40px;
+  background: rgba(13, 19, 32, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 18px 28px;
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.logo-item {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--mut);
+  opacity: 0.7;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+}
+.logo-item:hover {
+  opacity: 1;
+  color: var(--cyan);
+  text-shadow: 0 0 10px var(--cyan-glow);
+}
+.tags-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tech-tag {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--mut);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* Card Enhancements */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 26px;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+.card:hover {
+  border-color: rgba(0, 240, 255, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1);
+  transform: translateY(-3px);
+}
+.card.hot {
+  border-color: var(--orange);
+  box-shadow: 0 0 25px var(--orange-glow);
+}
+
 </style>
 </head>
 <body>
+
 <header><div class="wrap">
-  <a class="logo" href="#top">Готово<i>.</i></a>
-  <nav><a href="#sites">Сайти</a><a href="#bots">Боти</a><a href="#hosting">Хостинг</a><a href="#calc">Калькулятор</a><a href="#faq">FAQ</a></nav><a href="/" style="margin-right:15px;color:var(--text);font-weight:bold;">UK</a><a href="/en" style="margin-right:20px;color:var(--mut);">EN</a>
-  <button id="theme" aria-label="Змінити тему">◐</button>
-  <a class="btn" href="#contact" style="padding:8px 16px;font-size:14px;margin-left:10px;">Замовити</a>
-  
+  <a class="logo-omni" href="/">
+    <div class="logo-orb">⚡</div>
+    <span>OMNI</span>
+  </a>
+  <nav>
+    <a href="#sites">Сайти</a>
+    <a href="#bots">Боти</a>
+    <a href="#hosting">Хостинг</a>
+    <a href="#calc">Калькулятор</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <div style="display:flex;align-items:center;gap:12px;margin-left:auto;">
+    <a href="/" style="color:var(--cyan);font-weight:bold;font-size:13px;">UK</a>
+    <a href="/en" style="color:var(--mut);font-weight:600;font-size:13px;">EN</a>
+    <button id="theme" aria-label="Toggle theme" style="border:1px solid var(--line);background:none;color:var(--text);border-radius:50%;width:34px;height:34px;cursor:pointer;">◐</button>
+    <a class="btn-orange-glow" href="#contact">ЗАМОВИТИ ДОСТУП</a>
+  </div>
 </div></header>
 
+
 <main id="top">
-<section class="hero"><div class="wrap">
-  <h1>Готовий сайт за 3 дні. <span>Без сюрпризів у ціні.</span></h1>
-  <p>Обираєте пакет, ми налаштовуємо дизайн, домен і хостинг під ваш бізнес. Фіксована вартість, чесні терміни, підтримка після запуску.</p>
-  <div class="row"><a class="btn" href="#sites">Обрати сайт</a><a class="btn ghost" href="#calc">Порахувати вартість</a></div>
-  <div class="perks">
-    <div class="perk"><b>Запуск від 3 днів</b><span>Шаблон + ваш контент = онлайн</span></div>
-    <div class="perk"><b>Аптайм 99,9%</b><span>Моніторинг 24/7 і щоденні бекапи</span></div>
-    <div class="perk"><b>Підтримка в Telegram</b><span>Відповідаємо протягом години</span></div>
-    <div class="perk"><b>Фіксована ціна</b><span>Усе, що входить, записано в договорі</span></div>
+
+
+<section class="hero-omni"><div class="wrap">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow-tag">ВІД ДИСПЕТЧЕРИЗАЦІЇ ДО ДОСТАВКИ</div>
+      <h1>Автономна ШІ-система. <span>Створена для бізнесу та логістики.</span></h1>
+      <p>Автоматизує заявки, пошту, диспетчеризацію та CRM, щоб ваша команда фокусувалася на головному.</p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
+        <a href="#contact" class="btn-orange-glow" style="padding:14px 28px;font-size:13px;">ЗАМОВИТИ ДЕМО &rarr;</a>
+        <a href="#calc" class="btn-orange-glow" style="background:transparent;border-color:rgba(255,255,255,0.2);color:var(--text) !important;box-shadow:none;">ПОРАХУВАТИ ВАРТІСТЬ</a>
+      </div>
+    </div>
+    
+    <div class="diagram-container">
+      <div class="nodes-row">
+        <div class="node-card">
+          <div class="node-icon">📩</div>
+          <div class="node-title">Заявка / CRM</div>
+        </div>
+        <div class="node-card" style="border-color:var(--cyan);box-shadow:0 0 15px var(--cyan-glow);">
+          <div class="node-icon">🧠</div>
+          <div class="node-title">ШІ Диспетчер</div>
+        </div>
+        <div class="node-card">
+          <div class="node-icon">🗺️</div>
+          <div class="node-title">Маршрут і Оплата</div>
+        </div>
+      </div>
+      
+      <div class="vehicle-art">
+        <div class="autopilot-bar">
+          <div class="autopilot-title">
+            <span>АВТОПІЛОТ</span>
+            <div class="status-dots">
+              <div class="dot orange"></div>
+              <div class="dot cyan"></div>
+              <div class="dot green"></div>
+            </div>
+          </div>
+          <div class="pills-bar">
+            <span class="pill-badge">ДИСПЕТЧЕР</span>
+            <span class="pill-badge" style="border-color:var(--cyan);color:var(--cyan);">МАРШРУТИ</span>
+            <span class="pill-badge" style="border-color:#10b981;color:#10b981;">СИНХРО</span>
+          </div>
+        </div>
+        
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;">
+          <div>
+            <div style="font-size:12px;color:var(--mut);">Активні об'єкти</div>
+            <div style="font-family:'Unbounded',sans-serif;font-size:24px;color:var(--cyan);font-weight:700;">1,805 <small style="font-size:12px;color:var(--mut);">проєктів</small></div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:12px;color:var(--mut);">Час відповіді</div>
+            <div style="font-family:'Unbounded',sans-serif;font-size:20px;color:var(--orange);font-weight:700;">00.25s <small style="font-size:11px;color:var(--mut);">середнє</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="logos-strip">
+    <div class="logo-item">logoipsum</div>
+    <div class="logo-item">route-io</div>
+    <div class="logo-item">datum</div>
+    <div class="logo-item">omni</div>
+    <div class="logo-item">SAP</div>
+    <div class="tags-row">
+      <span class="tech-tag">JSON</span>
+      <span class="tech-tag">TMS</span>
+      <span class="tech-tag">ROUTING</span>
+      <span class="tech-tag">API</span>
+      <span class="tech-tag">SLACK</span>
+    </div>
   </div>
 </div></section>
+
+
 
 <section id="sites"><div class="wrap">
   <h2>Готові сайти під ключ</h2>
