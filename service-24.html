@@ -41,7 +41,11 @@ footer{padding:30px 20px;text-align:center;color:var(--mut);font-size:14px;}
 <!-- Block 1: Header -->
 <header>
   <a href="/" class="logo">Gotovo<i>.</i></a>
-  <a href="/" style="margin-left:auto;color:var(--mut);text-decoration:none;">← Назад на головну</a>
+  <div style="margin-left:auto;display:flex;align-items:center;">
+    <a href="service-24" style="margin-right:15px;color:var(--text);font-weight:bold;text-decoration:none;">UK</a>
+    <a href="en/service-24" style="margin-right:20px;color:var(--mut);font-weight:normal;text-decoration:none;">EN</a>
+    <a href="/" style="color:var(--mut);text-decoration:none;">← Назад на головну</a>
+  </div>
 </header>
 
 <!-- Block 2: Hero -->
@@ -182,8 +186,12 @@ footer{padding:30px 20px;text-align:center;color:var(--mut);font-size:14px;}
 
 <!-- Block 9: Footer -->
 <footer>
-  <div class="container">
-    © 2026 Gotovo. Усі права захищено.
+  <div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;">
+    <div>© 2026 Gotovo. Усі права захищено.</div>
+    <div style="display:flex;gap:20px;font-size:13px;">
+      <a href="/privacy" style="text-decoration:underline;">Політика конфіденційності</a>
+      <a href="/terms" style="text-decoration:underline;">Умови використання</a>
+    </div>
   </div>
 </footer>
 </body>

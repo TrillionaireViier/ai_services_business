@@ -41,7 +41,11 @@ footer{padding:30px 20px;text-align:center;color:var(--mut);font-size:14px;}
 <!-- Block 1: Header -->
 <header>
   <a href="/en" class="logo">Gotovo<i>.</i></a>
-  <a href="/en" style="margin-left:auto;color:var(--mut);text-decoration:none;">← Back to home</a>
+  <div style="margin-left:auto;display:flex;align-items:center;">
+    <a href="../service-19" style="margin-right:15px;color:var(--mut);font-weight:normal;text-decoration:none;">UK</a>
+    <a href="service-19" style="margin-right:20px;color:var(--text);font-weight:bold;text-decoration:none;">EN</a>
+    <a href="/en" style="color:var(--mut);text-decoration:none;">← Back to home</a>
+  </div>
 </header>
 
 <!-- Block 2: Hero -->
@@ -182,8 +186,12 @@ footer{padding:30px 20px;text-align:center;color:var(--mut);font-size:14px;}
 
 <!-- Block 9: Footer -->
 <footer>
-  <div class="container">
-    © 2026 Gotovo. All rights reserved.
+  <div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;">
+    <div>© 2026 Gotovo. All rights reserved.</div>
+    <div style="display:flex;gap:20px;font-size:13px;">
+      <a href="/en/privacy" style="text-decoration:underline;">Privacy Policy</a>
+      <a href="/en/terms" style="text-decoration:underline;">Terms of Service</a>
+    </div>
   </div>
 </footer>
 </body>

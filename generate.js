@@ -46,7 +46,11 @@ function getTemplate(lang, t) {
 <!-- Block 1: Header -->
 <header>
   <a href="${t.homeLink}" class="logo">Gotovo<i>.</i></a>
-  <a href="${t.homeLink}" style="margin-left:auto;color:var(--mut);text-decoration:none;">← ${t.back}</a>
+  <div style="margin-left:auto;display:flex;align-items:center;">
+    <a href="{{UK_LINK}}" style="margin-right:15px;color:{{UK_COLOR}};font-weight:{{UK_WEIGHT}};text-decoration:none;">UK</a>
+    <a href="{{EN_LINK}}" style="margin-right:20px;color:{{EN_COLOR}};font-weight:{{EN_WEIGHT}};text-decoration:none;">EN</a>
+    <a href="${t.homeLink}" style="color:var(--mut);text-decoration:none;">← ${t.back}</a>
+  </div>
 </header>
 
 <!-- Block 2: Hero -->
@@ -187,8 +191,12 @@ function getTemplate(lang, t) {
 
 <!-- Block 9: Footer -->
 <footer>
-  <div class="container">
-    © 2026 Gotovo. ${t.allRights}
+  <div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;">
+    <div>© 2026 Gotovo. ${t.allRights}</div>
+    <div style="display:flex;gap:20px;font-size:13px;">
+      <a href="{{PRIVACY_LINK}}" style="text-decoration:underline;">{{PRIVACY_TEXT}}</a>
+      <a href="{{TERMS_LINK}}" style="text-decoration:underline;">{{TERMS_TEXT}}</a>
+    </div>
   </div>
 </footer>
 </body>
@@ -315,13 +323,33 @@ for (let i = 0; i < 27; i++) {
   // UK
   let s = ukAll[i];
   let features = `<li>Індивідуальний дизайн та розробка</li><li>Підтримка 24/7 протягом року</li><li>Базове SEO та оптимізація швидкості</li><li>Гарантія якості та безперебійної роботи</li>`;
-  let html = tmplUk.replace(/{{TITLE}}/g, s.n).replace(/{{DESC}}/g, s.d).replace(/{{PRICE}}/g, s.p).replace(/{{FEATURES}}/g, features);
+  let html = tmplUk.replace(/{{TITLE}}/g, s.n).replace(/{{DESC}}/g, s.d).replace(/{{PRICE}}/g, s.p).replace(/{{FEATURES}}/g, features)
+    .replace('{{UK_LINK}}', `service-${i}`)
+    .replace('{{EN_LINK}}', `en/service-${i}`)
+    .replace('{{UK_COLOR}}', 'var(--text)')
+    .replace('{{UK_WEIGHT}}', 'bold')
+    .replace('{{EN_COLOR}}', 'var(--mut)')
+    .replace('{{EN_WEIGHT}}', 'normal')
+    .replace('{{PRIVACY_LINK}}', '/privacy')
+    .replace('{{TERMS_LINK}}', '/terms')
+    .replace('{{PRIVACY_TEXT}}', 'Політика конфіденційності')
+    .replace('{{TERMS_TEXT}}', 'Умови використання');
   fs.writeFileSync(`service-${i}.html`, html);
 
   // EN
   let se = enAll[i];
   let featuresEn = `<li>Custom design and development</li><li>24/7 Support for a year</li><li>Basic SEO and speed optimization</li><li>Quality and uptime guarantee</li>`;
-  let htmlEn = tmplEn.replace(/{{TITLE}}/g, se.n).replace(/{{DESC}}/g, se.d).replace(/{{PRICE}}/g, se.p).replace(/{{FEATURES}}/g, featuresEn);
+  let htmlEn = tmplEn.replace(/{{TITLE}}/g, se.n).replace(/{{DESC}}/g, se.d).replace(/{{PRICE}}/g, se.p).replace(/{{FEATURES}}/g, featuresEn)
+    .replace('{{UK_LINK}}', `../service-${i}`)
+    .replace('{{EN_LINK}}', `service-${i}`)
+    .replace('{{UK_COLOR}}', 'var(--mut)')
+    .replace('{{UK_WEIGHT}}', 'normal')
+    .replace('{{EN_COLOR}}', 'var(--text)')
+    .replace('{{EN_WEIGHT}}', 'bold')
+    .replace('{{PRIVACY_LINK}}', '/en/privacy')
+    .replace('{{TERMS_LINK}}', '/en/terms')
+    .replace('{{PRIVACY_TEXT}}', 'Privacy Policy')
+    .replace('{{TERMS_TEXT}}', 'Terms of Service');
   fs.writeFileSync(`en/service-${i}.html`, htmlEn);
 }
 console.log('Generated expanded pages for all 27 services');
