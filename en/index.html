@@ -1,752 +1,820 @@
-<!DOCTYPE html>
-<html lang="uk">
+const fs = require('fs');
+
+const studioHTML = `<!DOCTYPE html>
+<html lang="en">
 <head>
-<script>if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light';</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gotovo — turnkey websites, bots and hosting</title>
-<meta name="description" content="Turnkey websites, chatbots, hosting and SEO at a fixed price. Launch in 3-7 days.">
+<title>CINE-AI — Autonomous AI Video Production System</title>
+<meta name="description" content="End-to-End Topic-Agnostic Autonomous AI Video Production System for Long-form and Shorts.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0f1c;--panel:#111a2e;--line:#22304d;--text:#e8edf7;--mut:#8d9bb8;--acc:#3dffa2;--acc2:#4d8bff;--r:14px}
-[data-theme=light]{--bg:#ffffff;--panel:#f8fafc;--line:#e2e8f0;--text:#0f172a;--mut:#475569;--acc:#059669;--acc2:#2563eb}
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font:400 16px/1.6 Onest,system-ui,sans-serif}
-h1,h2,h3{font-family:Unbounded,Onest,sans-serif;line-height:1.15}
-a{color:inherit;text-decoration:none}
-.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
-section{padding:72px 0}
-h2{font-size:clamp(24px,4vw,36px);margin-bottom:12px}
-.lead{color:var(--mut);max-width:60ch;margin-bottom:36px}
-.btn{display:inline-block;border:0;cursor:pointer;font:600 15px Onest,sans-serif;padding:13px 22px;border-radius:10px;background:var(--text);color:var(--bg)}
-.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
-.btn:hover{filter:brightness(1.1)}
-:focus-visible{outline:2px solid var(--acc2);outline-offset:3px}
-header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-header .wrap{display:flex;align-items:center;gap:20px;height:64px}
-.logo{font:700 20px Unbounded,sans-serif;margin-right:auto}.logo i{color:var(--acc);font-style:normal}
-nav{display:flex;gap:20px;color:var(--mut);font-size:14px}nav a:hover{color:var(--text)}
-#theme{background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;width:38px;height:38px;cursor:pointer}
-.hero{padding:80px 0 56px}
-.hero h1{font-size:clamp(32px,6.5vw,64px);max-width:16ch;margin-bottom:20px}
-.hero h1 span{color:var(--acc)}
-.hero p{color:var(--mut);font-size:18px;max-width:52ch;margin-bottom:28px}
-.row{display:flex;gap:12px;flex-wrap:wrap}
-.perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:48px}
-.perk{border-left:3px solid var(--acc);padding:4px 0 4px 14px}
-.perk b{display:block}.perk span{color:var(--mut);font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:10px}
-.card.hot{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc),0 8px 40px -16px var(--acc)}
-.card h3{font-size:18px}
-.card p{color:var(--mut);font-size:14px}
-.price{font:700 28px Unbounded,sans-serif}.price small{font:400 13px Onest;color:var(--mut)}
-.card ul{list-style:none;padding:0;color:var(--mut);font-size:14px;display:grid;gap:6px;margin-bottom:auto}
-.card li:before{content:"✓ ";color:var(--acc)}
-.tag{font-size:13px;color:var(--acc2)}
-.sw{display:inline-flex;border:1px solid var(--line);border-radius:10px;padding:4px;margin-bottom:24px}
-.sw button{border:0;background:none;color:var(--mut);padding:8px 16px;border-radius:7px;cursor:pointer;font:500 14px Onest}
-.sw button.on{background:var(--text);color:var(--bg)}
-.calc{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
-.opts{display:grid;gap:10px}
-.opt{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer}
-.opt input{accent-color:var(--acc);width:18px;height:18px}
-.opt span:nth-child(2){flex:1}.opt em{font-style:normal;color:var(--mut)}
-.total{position:sticky;top:84px;align-self:start}
-.total .price{font-size:36px;color:var(--acc)}
-.rev{font-size:15px}.rev b{display:block;margin-top:8px;font-size:14px}.rev span{color:var(--mut);font-size:13px}
-.port .shot{height:120px;border-radius:10px;background:linear-gradient(135deg,var(--acc2),var(--acc));opacity:.85}
-details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:10px}
-summary{cursor:pointer;font-weight:600}
-details p{color:var(--mut);margin-top:10px}
-form{display:grid;gap:12px}
-input[type=text],input[type=tel],select,textarea{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:inherit}
-.contact{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mut);font-size:14px}
-dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;padding:26px;width:min(440px,92vw)}
-dialog::backdrop{background:rgba(0,0,0,.65)}
-.ok{color:var(--acc);font-weight:600}
-@media(max-width:760px){nav{display:none}.calc,.contact{grid-template-columns:1fr}.total{position:static}section{padding:52px 0}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-
-/* Futuristic OMNI AI Logistics Theme */
 :root {
-  --bg: #090d16;
-  --panel: rgba(15, 22, 36, 0.75);
-  --panel-solid: #0e1524;
-  --line: rgba(255, 255, 255, 0.1);
-  --line-glow: rgba(0, 240, 255, 0.3);
-  --text: #f0f4fc;
-  --mut: #8e9bb4;
+  --bg: #07090e;
+  --panel: #0d111a;
+  --panel-border: rgba(0, 240, 255, 0.15);
+  --panel-hover: #141b29;
   --cyan: #00f0ff;
-  --cyan-glow: rgba(0, 240, 255, 0.4);
+  --cyan-glow: rgba(0, 240, 255, 0.35);
   --orange: #ff6b2b;
-  --orange-glow: rgba(255, 107, 43, 0.4);
-  --acc: #00f0ff;
-  --acc2: #ff6b2b;
-  --r: 16px;
-}
-[data-theme=light] {
-  --bg: #f5f8fc;
-  --panel: rgba(255, 255, 255, 0.85);
-  --panel-solid: #ffffff;
-  --line: #e1e8f5;
-  --line-glow: rgba(37, 99, 235, 0.3);
-  --text: #0b1329;
-  --mut: #506184;
-  --cyan: #0284c7;
-  --cyan-glow: rgba(2, 132, 199, 0.3);
-  --orange: #ea580c;
-  --orange-glow: rgba(234, 88, 12, 0.3);
-  --acc: #0284c7;
-  --acc2: #ea580c;
+  --orange-glow: rgba(255, 107, 43, 0.35);
+  --purple: #a855f7;
+  --green: #10b981;
+  --text: #f1f5f9;
+  --mut: #64748b;
+  --mut-light: #94a3b8;
+  --r: 12px;
 }
 
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   background: var(--bg);
-  background-image: 
-    radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 85% 60%, rgba(255, 107, 43, 0.08) 0%, transparent 40%),
-    linear-gradient(to bottom, rgba(9, 13, 22, 0.95), var(--bg));
-  background-attachment: fixed;
   color: var(--text);
-  font-family: 'Onest', sans-serif;
+  font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  line-height: 1.5;
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(0, 240, 255, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(255, 107, 43, 0.06) 0%, transparent 40%);
+  background-attachment: fixed;
 }
 
-/* Header Glass Navbar */
+/* Header */
 header {
-  position: sticky;
-  top: 16px;
-  z-index: 100;
-  padding: 0 20px;
-  background: transparent;
-  border-bottom: none;
-}
-header .wrap {
-  background: rgba(13, 19, 32, 0.8);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 40px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(0, 240, 255, 0.1);
-  padding: 8px 24px;
   height: 64px;
-  max-width: 1180px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-}
-.logo-omni {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: 'Unbounded', sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  color: var(--text);
-  text-decoration: none;
-}
-.logo-orb {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #00f0ff, #0052cc);
-  box-shadow: 0 0 15px var(--cyan-glow), inset 0 0 8px #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-.logo-orb::after {
-  content: '';
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1px dashed rgba(0, 240, 255, 0.6);
-  position: absolute;
-  animation: spinOrb 12s linear infinite;
-}
-@keyframes spinOrb { 100% { transform: rotate(360deg); } }
-
-nav a {
-  font-size: 13px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--mut);
-  transition: all 0.2s;
-}
-nav a:hover {
-  color: var(--cyan);
-  text-shadow: 0 0 8px var(--cyan-glow);
-}
-
-.btn-orange-glow {
-  background: linear-gradient(135deg, rgba(255, 107, 43, 0.15), rgba(255, 107, 43, 0.3));
-  border: 1px solid var(--orange);
-  color: #ffffff !important;
-  font-family: 'Unbounded', sans-serif;
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 10px 22px;
-  border-radius: 30px;
-  box-shadow: 0 0 20px var(--orange-glow);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-}
-.btn-orange-glow:hover {
-  background: var(--orange);
-  color: #000000 !important;
-  box-shadow: 0 0 35px var(--orange-glow);
-  transform: translateY(-2px);
-}
-
-/* Hero Section */
-.hero-omni {
-  padding: 60px 0 40px;
-  position: relative;
-}
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-}
-@media (max-width: 960px) {
-  .hero-grid { grid-template-columns: 1fr; }
-}
-
-.eyebrow-tag {
-  color: var(--orange);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.eyebrow-tag::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  background: var(--orange);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--orange-glow);
-}
-
-.hero-omni h1 {
-  font-family: 'Unbounded', sans-serif;
-  font-size: clamp(32px, 4.2vw, 54px);
-  line-height: 1.15;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: #ffffff;
-}
-.hero-omni h1 span {
-  background: linear-gradient(135deg, #ffffff, var(--cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hero-omni p {
-  color: var(--mut);
-  font-size: 17px;
-  line-height: 1.6;
-  margin-bottom: 32px;
-  max-width: 540px;
-}
-
-/* Hero Visual Diagram */
-.diagram-container {
-  background: rgba(13, 19, 32, 0.7);
-  border: 1px solid rgba(0, 240, 255, 0.2);
-  border-radius: 24px;
-  padding: 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 14, 22, 0.85);
   backdrop-filter: blur(16px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 0 30px rgba(0, 240, 255, 0.05);
-  position: relative;
-  overflow: hidden;
-}
-.diagram-container::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.nodes-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  position: relative;
-  z-index: 2;
-  margin-bottom: 24px;
-}
-.node-card {
-  background: rgba(20, 29, 46, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 14px;
-  padding: 16px 12px;
-  text-align: center;
-  transition: all 0.3s;
-}
-.node-card:hover {
-  border-color: var(--cyan);
-  box-shadow: 0 0 20px var(--cyan-glow);
-  transform: translateY(-4px);
-}
-.node-icon {
-  width: 40px;
-  height: 40px;
-  margin: 0 auto 10px;
-  border-radius: 10px;
-  background: rgba(0, 240, 255, 0.1);
-  border: 1px solid var(--cyan);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  color: var(--cyan);
-  box-shadow: 0 0 12px var(--cyan-glow);
-}
-.node-title {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text);
-}
-
-/* Vehicle Graphic Section */
-.vehicle-art {
-  background: linear-gradient(180deg, rgba(16, 24, 40, 0.9), rgba(8, 12, 20, 0.95));
-  border: 1px solid rgba(0, 240, 255, 0.25);
-  border-radius: 16px;
-  padding: 20px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.autopilot-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+}
+.brand-orb {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  box-shadow: 0 0 16px var(--cyan-glow);
+}
+.brand span { color: var(--cyan); }
+
+.modes-bar {
+  display: flex;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4px;
+  border-radius: 30px;
+  gap: 4px;
+}
+.mode-btn {
+  background: none;
+  border: none;
+  color: var(--mut-light);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.mode-btn:hover { color: #fff; }
+.mode-btn.active {
+  background: var(--cyan);
+  color: #000;
+  font-weight: 700;
+  box-shadow: 0 0 15px var(--cyan-glow);
+}
+
+.system-status {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--mut-light);
+}
+.badge-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: var(--green);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.dot-live {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* Main Studio Layout */
+.studio-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 340px 1fr 420px;
+  gap: 24px;
+  min-height: calc(100vh - 64px);
+}
+@media (max-width: 1280px) {
+  .studio-container { grid-template-columns: 1fr; }
+}
+
+/* Control Panel */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--r);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   padding-bottom: 12px;
 }
-.autopilot-title {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 13px;
+.panel-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
   font-weight: 700;
+  text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--text);
+  color: var(--cyan);
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.status-dots {
-  display: flex;
-  gap: 6px;
-}
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-.dot.orange { background: var(--orange); box-shadow: 0 0 8px var(--orange-glow); }
-.dot.cyan { background: var(--cyan); box-shadow: 0 0 8px var(--cyan-glow); }
-.dot.green { background: #10b981; box-shadow: 0 0 8px #10b981; }
 
-.pills-bar {
+.input-group {
   display: flex;
+  flex-direction: column;
   gap: 8px;
-  flex-wrap: wrap;
 }
-.pill-badge {
-  background: rgba(255, 107, 43, 0.15);
-  border: 1px solid rgba(255, 107, 43, 0.4);
-  color: var(--orange);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 6px;
+.input-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--mut-light);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+.input-control {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #fff;
+  font-size: 13px;
+  font-family: inherit;
+  transition: all 0.2s;
+  width: 100%;
+}
+.input-control:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan-glow);
+}
+textarea.input-control {
+  resize: vertical;
+  min-height: 80px;
+}
 
-/* Logos Marquee Strip */
-.logos-strip {
-  margin-top: 40px;
-  background: rgba(13, 19, 32, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 18px 28px;
-  backdrop-filter: blur(12px);
+.select-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-produce {
+  background: linear-gradient(135deg, var(--orange), #e04800);
+  border: none;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 25px var(--orange-glow);
+  transition: all 0.3s;
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.btn-produce:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px var(--orange-glow);
+}
+
+/* Discovery Radar Matrix */
+.trend-card {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.trend-card:hover {
+  border-color: var(--cyan);
+  background: var(--panel-hover);
+}
+.trend-header {
+  display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.trend-score {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--cyan);
+  background: rgba(0, 240, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.trend-topic {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.score-bars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  font-size: 9px;
+  color: var(--mut);
+}
+.bar-item { text-align: center; }
+.bar-val {
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  margin-top: 2px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  background: var(--cyan);
+}
+
+/* Central Timeline & Scene Storyboard */
+.center-stage {
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 }
-.logo-item {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--mut);
-  opacity: 0.7;
-  letter-spacing: 1px;
-  transition: all 0.3s;
+
+.pipeline-stepper {
+  display: flex;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--r);
+  padding: 12px;
+  justify-content: space-between;
 }
-.logo-item:hover {
-  opacity: 1;
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--mut);
+}
+.step-item.active {
+  color: var(--cyan);
+}
+.step-item.completed {
+  color: var(--green);
+}
+.step-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+.step-item.active .step-num {
+  background: var(--cyan);
+  color: #000;
+  box-shadow: 0 0 10px var(--cyan-glow);
+}
+.step-item.completed .step-num {
+  background: var(--green);
+  color: #000;
+}
+
+/* Scenes List */
+.scenes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.scene-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 80px 1fr 140px 100px;
+  gap: 16px;
+  align-items: center;
+  transition: all 0.2s;
+}
+.scene-card:hover {
+  border-color: rgba(0, 240, 255, 0.4);
+  background: var(--panel-hover);
+}
+.scene-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--orange);
+  background: rgba(255, 107, 43, 0.1);
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-align: center;
+}
+.scene-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.scene-script {
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 500;
+}
+.scene-visual-prompt {
+  font-size: 11px;
+  color: var(--mut-light);
+  font-style: italic;
+}
+.scene-asset-type {
+  font-size: 11px;
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--cyan);
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  text-align: center;
+}
+.scene-actions {
+  display: flex;
+  gap: 6px;
+}
+.btn-mini {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--mut-light);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-mini:hover {
+  background: var(--cyan);
+  color: #000;
+}
+
+/* Right Panel: Video Preview Player & QA Report */
+.preview-player {
+  background: #000;
+  border: 1px solid var(--panel-border);
+  border-radius: var(--r);
+  aspect-ratio: 16/9;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.video-canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: radial-gradient(circle at center, #111827, #030712);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.subtitle-overlay {
+  position: absolute;
+  bottom: 24px;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+}
+.subtitle-highlight {
   color: var(--cyan);
   text-shadow: 0 0 10px var(--cyan-glow);
 }
-.tags-row {
+
+.player-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 16px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.9));
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
 }
-.tech-tag {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--mut);
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 6px;
+.btn-play {
+  background: var(--cyan);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.progress-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+}
+.progress-fill {
+  width: 45%;
+  height: 100%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan-glow);
 }
 
-/* Card Enhancements */
-.card {
+/* QA & Metadata Report */
+.qa-card {
   background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 26px;
-  backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
+  border: 1px solid var(--panel-border);
+  border-radius: var(--r);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-.card:hover {
-  border-color: rgba(0, 240, 255, 0.4);
-  box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1);
-  transform: translateY(-3px);
+.qa-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  font-size: 11px;
 }
-.card.hot {
-  border-color: var(--orange);
-  box-shadow: 0 0 25px var(--orange-glow);
+.qa-item {
+  background: rgba(0,0,0,0.3);
+  padding: 8px 10px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
 }
+.qa-label { color: var(--mut-light); }
+.qa-val { font-weight: 700; color: var(--green); }
 
+.thumbnails-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.thumb-box {
+  aspect-ratio: 16/9;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--mut);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.thumb-box:hover {
+  border-color: var(--cyan);
+  color: #fff;
+}
 </style>
 </head>
 <body>
 
-<header><div class="wrap">
-  <a class="logo-omni" href="/en">
-    <div class="logo-orb">⚡</div>
-    <span>OMNI</span>
+<!-- Header -->
+<header>
+  <a href="#" class="brand">
+    <div class="brand-orb">🎬</div>
+    <div>CINE-AI <span>STUDIO</span></div>
   </a>
-  <nav>
-    <a href="#sites">About</a>
-    <a href="#bots">Platform</a>
-    <a href="#hosting">Solutions</a>
-    <a href="#calc">Resources</a>
-    <a href="#faq">FAQ</a>
-  </nav>
-  <div style="display:flex;align-items:center;gap:12px;margin-left:auto;">
-    <a href="/" style="color:var(--mut);font-weight:600;font-size:13px;">UK</a>
-    <a href="/en" style="color:var(--cyan);font-weight:bold;font-size:13px;">EN</a>
-    <button id="theme" aria-label="Toggle theme" style="border:1px solid var(--line);background:none;color:var(--text);border-radius:50%;width:34px;height:34px;cursor:pointer;">◐</button>
-    <a class="btn-orange-glow" href="#contact">REQUEST ACCESS</a>
+
+  <div class="modes-bar">
+    <button class="mode-btn active" onclick="setMode('A')">⚡ Mode A: Prompt</button>
+    <button class="mode-btn" onclick="setMode('B')">📄 Mode B: Sources</button>
+    <button class="mode-btn" onclick="setMode('C')">🎯 Mode C: Directed</button>
+    <button class="mode-btn" onclick="setMode('D')">📡 Mode D: Discovery</button>
   </div>
-</div></header>
 
-
-<main id="top">
-
-
-<section class="hero-omni"><div class="wrap">
-  <div class="hero-grid">
-    <div>
-      <div class="eyebrow-tag">FROM DISPATCH TO DESTINATION</div>
-      <h1>The Autonomous Workforce. <span>Built for Supply & Logistics.</span></h1>
-      <p>They read, orchestrate, and automate across dispatch, email, and TMS, so your team can focus on what matters.</p>
-      <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
-        <a href="#contact" class="btn-orange-glow" style="padding:14px 28px;font-size:13px;">REQUEST A DEMO &rarr;</a>
-        <a href="#calc" class="btn-orange-glow" style="background:transparent;border-color:rgba(255,255,255,0.2);color:var(--text) !important;box-shadow:none;">CALCULATE COST</a>
-      </div>
+  <div class="system-status">
+    <div class="badge-status">
+      <div class="dot-live"></div>
+      <span>Stateless Adapters: OK</span>
     </div>
-    
-    <div class="diagram-container">
-      <div class="nodes-row">
-        <div class="node-card">
-          <div class="node-icon">📩</div>
-          <div class="node-title">Email / TMS Input</div>
-        </div>
-        <div class="node-card" style="border-color:var(--cyan);box-shadow:0 0 15px var(--cyan-glow);">
-          <div class="node-icon">🧠</div>
-          <div class="node-title">AI Dispatcher</div>
-        </div>
-        <div class="node-card">
-          <div class="node-icon">🗺️</div>
-          <div class="node-title">Automated Route</div>
-        </div>
-      </div>
+    <div>Cost Cap: $5.00</div>
+  </div>
+</header>
+
+<!-- Main Workspace -->
+<div class="studio-container">
+
+  <!-- Left Sidebar: Production Control & Research -->
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-title">🎛️ Production Parameters</div>
+      <span style="font-size:11px;color:var(--cyan);font-family:'JetBrains Mono';">v2.4 Auto</span>
+    </div>
+
+    <!-- Mode A Control -->
+    <div id="modeForm" class="input-group">
+      <label>Topic / Prompt</label>
+      <textarea id="topicInput" class="input-control" placeholder="e.g. The Quantum Computing Breakthrough that threatens global cryptography"></textarea>
       
-      <div class="vehicle-art">
-        <div class="autopilot-bar">
-          <div class="autopilot-title">
-            <span>AUTOPILOT</span>
-            <div class="status-dots">
-              <div class="dot orange"></div>
-              <div class="dot cyan"></div>
-              <div class="dot green"></div>
-            </div>
+      <div class="select-row">
+        <div class="input-group">
+          <label>Aspect Ratio</label>
+          <select id="aspectSelect" class="input-control">
+            <option value="16:9">16:9 Landscape (YouTube)</option>
+            <option value="9:16">9:16 Vertical (Shorts/TikTok)</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Target Duration</label>
+          <select id="durationSelect" class="input-control">
+            <option value="60">60 Seconds</option>
+            <option value="180">3 Minutes</option>
+            <option value="600">10 Minutes</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Voice Tone & Pace</label>
+        <select id="voiceSelect" class="input-control">
+          <option value="documentary">Authoritative Documentary Narrator</option>
+          <option value="viral">Energetic Viral Tech Creator</option>
+          <option value="cinematic">Cinematic Slow-Burn</option>
+        </select>
+      </div>
+
+      <button class="btn-produce" onclick="startAutonomousProduction()">
+        🚀 LAUNCH PRODUCTION PIPELINE
+      </button>
+    </div>
+
+    <!-- Mode D Radar Section -->
+    <div class="panel-header" style="margin-top:10px;">
+      <div class="panel-title">📡 Viral Trend Radar</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="trend-card" onclick="loadTrend('Quantum Computing Security Break')">
+        <div class="trend-header">
+          <span class="trend-score">SCORE: 9.6/10</span>
+          <span style="font-size:10px;color:var(--orange);">HIGH VELOCITY</span>
+        </div>
+        <div class="trend-topic">Quantum Computing Breakthrough in Cryptography</div>
+        <div class="score-bars">
+          <div class="bar-item">Fresh<div class="bar-val"><div class="bar-fill" style="width:95%;"></div></div></div>
+          <div class="bar-item">Velocity<div class="bar-val"><div class="bar-fill" style="width:90%;"></div></div></div>
+          <div class="bar-item">Curiosity<div class="bar-val"><div class="bar-fill" style="width:98%;"></div></div></div>
+          <div class="bar-item">Visual<div class="bar-val"><div class="bar-fill" style="width:88%;"></div></div></div>
+        </div>
+      </div>
+
+      <div class="trend-card" onclick="loadTrend('AI Autonomous Agents in Logistics')">
+        <div class="trend-header">
+          <span class="trend-score">SCORE: 9.2/10</span>
+          <span style="font-size:10px;color:var(--cyan);">VIRAL POTENTIAL</span>
+        </div>
+        <div class="trend-topic">Autonomous AI Workforce in Supply & Freight</div>
+        <div class="score-bars">
+          <div class="bar-item">Fresh<div class="bar-val"><div class="bar-fill" style="width:90%;"></div></div></div>
+          <div class="bar-item">Velocity<div class="bar-val"><div class="bar-fill" style="width:85%;"></div></div></div>
+          <div class="bar-item">Curiosity<div class="bar-val"><div class="bar-fill" style="width:94%;"></div></div></div>
+          <div class="bar-item">Visual<div class="bar-val"><div class="bar-fill" style="width:92%;"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Center Workspace: Pipeline & Storyboard Scene Breakdown -->
+  <div class="center-stage">
+    <!-- Stepper Bar -->
+    <div class="pipeline-stepper">
+      <div class="step-item completed">
+        <div class="step-num">✓</div>
+        <span>Research</span>
+      </div>
+      <div class="step-item completed">
+        <div class="step-num">✓</div>
+        <span>Scripting</span>
+      </div>
+      <div class="step-item active">
+        <div class="step-num">3</div>
+        <span>Storyboard & Media</span>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <span>TTS Audio</span>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <span>Compositing</span>
+      </div>
+    </div>
+
+    <!-- Storyboard Scenes Table -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">🎬 Semantic Storyboard & Media Match</div>
+        <div style="font-size:12px;color:var(--mut-light);">Match Hierarchy: Stock → Midjourney/Flux → Motion Chart</div>
+      </div>
+
+      <div class="scenes-grid" id="scenesList">
+        <!-- Scene 1 -->
+        <div class="scene-card">
+          <div class="scene-time">00:00-00:03</div>
+          <div class="scene-content">
+            <div class="scene-script">"What if every encrypted password on Earth became instantly readable?"</div>
+            <div class="scene-visual-prompt">Prompt: Cyberpunk glowing neon server room with digital padlock breaking</div>
           </div>
-          <div class="pills-bar">
-            <span class="pill-badge">DISPATCH</span>
-            <span class="pill-badge" style="border-color:var(--cyan);color:var(--cyan);">ROUTING</span>
-            <span class="pill-badge" style="border-color:#10b981;color:#10b981;">SYNC</span>
+          <div class="scene-asset-type">AI Visual (Flux v1)</div>
+          <div class="scene-actions">
+            <button class="btn-mini">Regen</button>
+            <button class="btn-mini">Edit</button>
           </div>
         </div>
-        
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;">
-          <div>
-            <div style="font-size:12px;color:var(--mut);">Active Fleet Telemetry</div>
-            <div style="font-family:'Unbounded',sans-serif;font-size:24px;color:var(--cyan);font-weight:700;">1,805 <small style="font-size:12px;color:var(--mut);">units</small></div>
+
+        <!-- Scene 2 -->
+        <div class="scene-card">
+          <div class="scene-time">00:03-00:08</div>
+          <div class="scene-content">
+            <div class="scene-script">"In a secret lab test yesterday, a 1,000-qubit processor solved RSA-2048 in under four seconds."</div>
+            <div class="scene-visual-prompt">Prompt: Holographic quantum processor chip emitting blue laser beams</div>
           </div>
-          <div style="text-align:right;">
-            <div style="font-size:12px;color:var(--mut);">Dispatch Time</div>
-            <div style="font-family:'Unbounded',sans-serif;font-size:20px;color:var(--orange);font-weight:700;">00.25s <small style="font-size:11px;color:var(--mut);">avg</small></div>
+          <div class="scene-asset-type">Dynamic Motion Chart</div>
+          <div class="scene-actions">
+            <button class="btn-mini">Regen</button>
+            <button class="btn-mini">Edit</button>
+          </div>
+        </div>
+
+        <!-- Scene 3 -->
+        <div class="scene-card">
+          <div class="scene-time">00:08-00:15</div>
+          <div class="scene-content">
+            <div class="scene-script">"Global financial networks and satellite communications are now scrambling to deploy lattice cryptography."</div>
+            <div class="scene-visual-prompt">Prompt: World map with glowing red network alert nodes and satellites</div>
+          </div>
+          <div class="scene-asset-type">Stock Video (4K)</div>
+          <div class="scene-actions">
+            <button class="btn-mini">Regen</button>
+            <button class="btn-mini">Edit</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
-  <div class="logos-strip">
-    <div class="logo-item">logoipsum</div>
-    <div class="logo-item">route-io</div>
-    <div class="logo-item">datum</div>
-    <div class="logo-item">omni</div>
-    <div class="logo-item">SAP</div>
-    <div class="tags-row">
-      <span class="tech-tag">JSON</span>
-      <span class="tech-tag">TMS</span>
-      <span class="tech-tag">ROUTING</span>
-      <span class="tech-tag">API</span>
-      <span class="tech-tag">SLACK</span>
+
+  <!-- Right Panel: Live Render Canvas Player & QA Report -->
+  <div style="display:flex;flex-direction:column;gap:20px;">
+    <!-- Live Preview Player -->
+    <div class="preview-player">
+      <div class="video-canvas">
+        <div style="font-size:48px;margin-bottom:10px;">⚡</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--cyan);">CINE-AI COMPOSITOR ENGINE</div>
+        <div style="font-size:12px;color:var(--mut-light);margin-top:4px;">1080p 60fps • Remotion Render Node</div>
+
+        <!-- Dynamic Kinetic Subtitle Overlay -->
+        <div class="subtitle-overlay">
+          RSA-2048 Solved in <span class="subtitle-highlight">Under 4 Seconds</span>
+        </div>
+      </div>
+
+      <div class="player-controls">
+        <button class="btn-play">▶</button>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        <span style="font-size:11px;font-family:'JetBrains Mono';color:#fff;">00:05 / 00:60</span>
+      </div>
+    </div>
+
+    <!-- Automated QA & Metadata Package -->
+    <div class="qa-card">
+      <div class="panel-header">
+        <div class="panel-title">🛡️ Automated QA & Audit Report</div>
+        <span style="font-size:11px;color:var(--green);font-family:'JetBrains Mono';">PASSED 100%</span>
+      </div>
+
+      <div class="qa-grid">
+        <div class="qa-item"><span class="qa-label">Semantic Drift</span><span class="qa-val">0.0%</span></div>
+        <div class="qa-item"><span class="qa-label">Dead Frames</span><span class="qa-val">0</span></div>
+        <div class="qa-item"><span class="qa-label">Caption Sync</span><span class="qa-val">100%</span></div>
+        <div class="qa-item"><span class="qa-label">Audio Peak</span><span class="qa-val">-1.2 dB</span></div>
+      </div>
+
+      <div style="font-size:12px;font-weight:600;color:var(--mut-light);margin-top:4px;">AI THUMBNAIL CONCEPTS</div>
+      <div class="thumbnails-row">
+        <div class="thumb-box">Concept 1</div>
+        <div class="thumb-box">Concept 2</div>
+        <div class="thumb-box">Concept 3</div>
+        <div class="thumb-box">Concept 4</div>
+      </div>
+
+      <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:10px;display:flex;justify-content:space-between;align-items:center;font-size:12px;">
+        <span style="color:var(--mut-light);">Production Cost: <strong style="color:var(--cyan);">$0.42</strong></span>
+        <button class="btn-mini" style="background:var(--cyan);color:#000;font-weight:700;">DOWNLOAD MASTER RENDER</button>
+      </div>
     </div>
   </div>
-</div></section>
 
-
-
-<section id="sites"><div class="wrap">
-  <h2>Turnkey Websites</h2>
-  <p class="lead">Choose website type. We design, fill with content, and launch on your domain.</p>
-  <div class="grid" id="siteGrid"></div>
-</div></section>
-
-<section id="bots"><div class="wrap">
-  <h2>Chatbots that sell and reply for you</h2>
-  <p class="lead">Telegram, Viber, and corporate bots. Receive applications, answer questions, and transfer data to your CRM.</p>
-  <div class="grid" id="botGrid"></div>
-</div></section>
-
-<section id="hosting"><div class="wrap">
-  <h2>Hassle-free hosting and domain</h2>
-  <p class="lead">Fast servers, SSL, daily backups and tech support. Pay monthly or yearly and save 20%.</p>
-  <div class="sw" role="group" aria-label="Billing period"><button class="on" data-p="m">Monthly</button><button data-p="y">Yearly -20%</button></div>
-  <div class="grid" id="hostGrid"></div>
-</div></section>
-
-<section id="calc"><div class="wrap">
-  <h2>Cost Calculator</h2>
-  <p class="lead">Select what you need, and the sum calculates instantly. Final price confirmed after a short call.</p>
-  <div class="calc">
-    <div class="opts" id="opts"></div>
-    <div class="card total">
-      <span class="tag">Estimated Cost</span>
-      <div class="price" id="sum">0 ₴</div>
-      <ul id="picked"><li>Nothing selected</li></ul>
-      <button class="btn" id="sendCalc">Send Calculation</button>
-    </div>
-  </div>
-</div></section>
-
-<section id="cases"><div class="wrap">
-  <h2>Cases</h2>
-  <p class="lead">Some projects we launched for clients.</p>
-  <div class="grid">
-    <a href="/en/case-0" class="card port" style="text-decoration:none;transition:transform 0.2s;"><div class="shot"></div><h3>Coffee Shop "Zerno"</h3><p>Online store with online payments. Launched in 6 days, first orders on launch day.</p></a>
-    <div class="card port"><div class="shot" style="filter:hue-rotate(60deg)"></div><h3>Barbershop "Boroda"</h3><p>Landing page with Telegram bot booking. Admin no longer sits on the phone.</p></div>
-    <div class="card port"><div class="shot" style="filter:hue-rotate(160deg)"></div><h3>Logistics Company</h3><p>Corporate site with CRM integration. Leads go straight to managers.</p></div>
-  </div>
-</div></section>
-
-<section id="reviews"><div class="wrap">
-  <h2>Client Reviews</h2>
-  
-  <div class="grid">
-    <div class="card rev">«The site was ready in four days, and the price didn't change.»<b>Olena, Coffee Shop Owner</b><span>Online Store</span></div>
-    <div class="card rev">«The bot took over half of our repetitive questions. Managers finally have time to sell.»<b>Andriy, Sales Director</b><span>Telegram Bot + CRM</span></div>
-    <div class="card rev">«Hosting has been working flawlessly for a year, and Telegram messages are answered immediately.»<b>Maryna, Marketer</b><span>Hosting & Support</span></div>
-  </div>
-</div></section>
-
-<section id="faq"><div class="wrap">
-  <h2>FAQ</h2><div style="height:20px"></div>
-  <details><summary>What happens after purchase?</summary><p>We provide access, show how to edit the site, and fix bugs for free for 30 days.</p></details>
-  <details><summary>Can I change the design to fit my brand?</summary><p>Yes. Colors, fonts, and logo are included in every package. Fully custom design is ordered separately.</p></details>
-  <details><summary>Who owns the site and domain?</summary><p>You do. The domain is registered to you, and the site code can be taken at any time.</p></details>
-  <details><summary>How does payment work?</summary><p>50% at the start, 50% after approval of the finished site. We accept cards and bank transfers.</p></details>
-  <details><summary>What if I need changes later?</summary><p>Minor edits are done within support. For major improvements, we agree on a separate cost in advance.</p></details>
-</div></section>
-
-<section id="contact"><div class="wrap contact">
-  <div>
-    <h2>Leave a request</h2>
-    <p class="lead">We will call back or text in messenger within an hour during business hours (Mon-Fri, 9:00-19:00).</p>
-    <div class="row"><a class="btn ghost" href="https://t.me/your_studio" target="_blank" rel="noopener">Telegram</a><a class="btn ghost" href="mailto:hello@gotovo.example">hello@gotovo.example</a></div>
-  </div>
-  <form id="leadForm" class="card">
-    <input type="text" name="name" placeholder="Name" required autocomplete="name">
-    <input type="tel" name="phone" placeholder="Phone or @telegram" required>
-    <select name="service"><option>Turnkey Website</option><option>Chatbot</option><option>Hosting & Domain</option><option>Additional Services</option></select>
-    <textarea name="msg" rows="3" placeholder="Briefly about your project"></textarea>
-    <button class="btn" type="submit">Send Request</button>
-    <p class="ok" id="formOk" hidden>Thank you! We will contact you shortly.</p>
-  </form>
-</div></section>
-</main>
-
-<footer>
-  <div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;">
-    <div>© 2026 Gotovo. All rights reserved.</div>
-    <div style="display:flex;gap:20px;font-size:13px;">
-      <a href="/en/privacy" style="color:var(--text);text-decoration:underline;">Privacy Policy</a>
-      <a href="/en/terms" style="color:var(--text);text-decoration:underline;">Terms of Service</a>
-    </div>
-  </div>
-</footer>
-
-<dialog id="modal">
-  <form id="orderForm" method="dialog">
-    <h3 id="mTitle" style="font-size:20px">Order</h3>
-    <p id="mInfo" style="color:var(--mut);font-size:14px"></p>
-    <input type="text" placeholder="Name" required>
-    <input type="tel" placeholder="Phone or @telegram" required>
-    <div class="row"><button class="btn" value="ok">Send</button><button class="btn ghost" value="cancel" formnovalidate>Cancel</button></div>
-    <p class="ok" id="mOk" hidden>Request accepted. We will reply shortly.</p>
-  </form>
-</dialog>
+</div>
 
 <script>
+function setMode(mode) {
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
 
-const fmt=n=>'$'+n;
-const sites=[
- {n:'Business Card',d:'One page about you and your services.',p:99,t:'3 days',f:['Up to 5 blocks','Contact form','Responsive design']},
- {n:'Landing Page',d:'Sales page for a single offer.',p:199,t:'5 days',f:['Up to 10 blocks','Analytics & Pixel','Fast loading'],hot:1},
- {n:'Corporate Site',d:'Full-fledged company website.',p:375,t:'7 days',f:['Up to 8 pages','Blog & News','Basic SEO']},
- {n:'Online Store',d:'Catalog, cart, and online payment.',p:499,t:'10 days',f:['Up to 100 products','Card payment','Admin panel']}
-];
-const bots=[
- {n:'Autoresponder',d:'Answers FAQs 24/7.',p:75,t:'2 days',f:['Menu & FAQ','Lead generation','Telegram or Viber']},
- {n:'Order & Payment Bot',d:'Accepts orders and money.',p:175,t:'5 days',f:['Catalog & cart','Accept payments','Manager alerts'],hot:1},
- {n:'CRM Integration Bot',d:'Automates sales and processes.',p:325,t:'from 7 days',f:['CRM integration','Broadcasts & segments','Team reports']},
- {n:'Restaurant Menu Bot',d:'Online food ordering & delivery.',p:139,t:'4 days',f:['Food catalog','Courier integration','Discounts & promo']},
- {n:'Helpdesk Bot',d:'Ticket system for customer support.',p:189,t:'6 days',f:['Create tickets','Switch to agent','Request history']},
- {n:'Booking Bot',d:'Automates time booking.',p:225,t:'7 days',f:['Booking calendar','Client reminders','Admin panel']},
- {n:'Crypto Bot',d:'Crypto payments and live rates.',p:375,t:'10 days',f:['Accept USDT/BTC','Live rates','P2P exchange']},
- {n:'Quiz Bot',d:'Lead generation through gamification.',p:115,t:'3 days',f:['Interactive tests','Collect email/phone','Issue bonuses']},
- {n:'Course Bot',d:'Platform for conducting courses.',p:289,t:'8 days',f:['Issue lessons','Student testing','Course payments']},
- {n:'Web App Store',d:'Full online store in Telegram.',p:365,t:'10 days',f:['Telegram Mini App','Cart & acquiring','Inventory sync'],hot:1},
- {n:'Broadcast Bot',d:'Mass message broadcasting.',p:89,t:'2 days',f:['Audience segmentation','Scheduled messages','Read analytics']},
- {n:'HR & Recruiting Bot',d:'Questionnaires and onboarding.',p:165,t:'5 days',f:['Collect CVs','Candidate testing','Employee DB']},
- {n:'Event Bot',d:'Ticket sales for events.',p:249,t:'7 days',f:['Event schedule','QR tickets','Event reminders']},
- {n:'Real Estate Bot',d:'Search and rent properties.',p:265,t:'8 days',f:['Filters (price/area)','Photo gallery','Direct contact to agent']},
- {n:'Fitness Bot',d:'Training and nutrition programs.',p:149,t:'5 days',f:['Calorie calculator','Video lessons','Progress tracking']},
- {n:'Translator Bot',d:'Automatic translation in chats.',p:99,t:'3 days',f:['Supports 50+ languages','Chat moderation','Live translation']},
- {n:'Task Manager Bot',d:'Task management for the team.',p:199,t:'6 days',f:['Create tasks','Deadlines & status','Member alerts']},
- {n:'Hotel Booking Bot',d:'Check rooms and book.',p:275,t:'7 days',f:['Select dates & rooms','Booking sync','Online payment']},
- {n:'Private Club (Sub)',d:'Private access by subscription.',p:199,t:'5 days',f:['Recurring payments','Auto-kick debtors','Club stats'],hot:1},
- {n:'AI Assistant (ChatGPT)',d:'Smart AI assistant for business.',p:450,t:'14 days',f:['Trained on your DB','Generate answers','Client mood analysis']}
-];
-const hosts=[
- {n:'Start',m:4,f:['10 GB NVMe','1 site','SSL & backups']},
- {n:'Business',m:8,f:['30 GB NVMe','5 sites','Priority support'],hot:1},
- {n:'Maximum',m:18,f:['100 GB NVMe','Unlimited sites','Dedicated resources']}
-];
-const addons=[
- ['Basic SEO',50],['Logo Design',75],['Copywriting (per page)',25],
- ['CRM Setup',125],['Ad Setup',89],['Yearly Hosting (Business)',72]
-];
-const $=s=>document.querySelector(s);
-const card=(x,price,sub,id)=>`<div class="card${x.hot?' hot':''}"><h3>${x.n}</h3>${x.d?`<p>${x.d}</p>`:''}${x.t?`<span class="tag">Launch: ${x.t}</span>`:''}<ul>${x.f.map(i=>`<li>${i}</li>`).join('')}</ul><div class="price">${price}<small>${sub||''}</small></div><div style="display:flex;flex-direction:column;gap:8px;margin-top:auto;"><button class="btn${x.hot?'':' ghost'}" data-order="${x.n}" data-price="${price}">Order</button><a href="/en/service-${id}" class="btn ghost" style="padding:6px;border:none;text-decoration:underline;font-size:13px;color:var(--mut);text-align:center;">Learn More</a></div></div>`;
-$('#siteGrid').innerHTML=sites.map((x,i)=>card(x,fmt(x.p),' / fixed', i)).join('');
-$('#botGrid').innerHTML=bots.map((x,i)=>card(x,'from '+fmt(x.p),'', i+4)).join('');
-function renderHost(p){
- $('#hostGrid').innerHTML=hosts.map((x,i)=>{
-  const v=p==='y'?Math.round(x.m*12*.8):x.m;
-  return card(x,fmt(v),p==='y'?' / yr':' / mo', i+24);
- }).join('');
+function loadTrend(topic) {
+  document.getElementById('topicInput').value = topic;
 }
-renderHost('m');
-document.querySelectorAll('.sw button').forEach(b=>b.onclick=()=>{
- document.querySelectorAll('.sw button').forEach(o=>o.classList.toggle('on',o===b));
- renderHost(b.dataset.p);
-});
-// calculator
-$('#opts').innerHTML=addons.map((a,i)=>`<label class="opt"><input type="checkbox" data-i="${i}"><span>${a[0]}</span><em>${fmt(a[1])}</em></label>`).join('');
-function calc(){
- const on=[...document.querySelectorAll('#opts input:checked')].map(c=>addons[c.dataset.i]);
- $('#sum').textContent=fmt(on.reduce((s,a)=>s+a[1],0));
- $('#picked').innerHTML=on.length?on.map(a=>`<li>${a[0]}</li>`).join(''):'<li>Nothing selected</li>';
- return on;
+
+function startAutonomousProduction() {
+  const topic = document.getElementById('topicInput').value;
+  if (!topic) { alert('Please enter a topic or select a trend'); return; }
+  alert('🚀 Launching Autonomous Production Pipeline for: ' + topic + '\n\nRunning Research -> Scripting -> Semantic Storyboard -> TTS Multi-track -> FFmpeg Composition...');
 }
-$('#opts').addEventListener('change',calc);
-// modal window
-const modal=$('#modal');
-function openModal(title,info){
- $('#mTitle').textContent=title;$('#mInfo').textContent=info;$('#mOk').hidden=true;modal.showModal();
-}
-document.addEventListener('click',e=>{
- const b=e.target.closest('[data-order]');
- if(b)openModal('Order: '+b.dataset.order,'Cost: '+b.dataset.price);
-});
-$('#sendCalc').onclick=()=>{
- const on=calc();
- if(!on.length){$('#sum').textContent='Select at least one service';return}
- openModal('Your calculation',on.map(a=>a[0]).join(', ')+'. Total: '+$('#sum').textContent);
-};
-$('#orderForm').addEventListener('submit',e=>{
- if(e.submitter&&e.submitter.value==='ok'){
-  e.preventDefault();$('#mOk').hidden=false;
-  setTimeout(()=>modal.close(),1500); // TODO: send to backend or Telegram bot
- }
-});
-$('#leadForm').addEventListener('submit',e=>{
- e.preventDefault();$('#formOk').hidden=false;e.target.reset(); // TODO: connect backend
-});
-// theme
-$('#theme').onclick=()=>{
- const r=document.documentElement;
- const isL=r.dataset.theme==='light';r.dataset.theme=isL?'dark':'light';localStorage.setItem('theme',isL?'dark':'light');
-};
 </script>
+
 </body>
 </html>
+`;
+
+fs.writeFileSync('video_studio.html', studioHTML);
+console.log('Created video_studio.html studio app');
