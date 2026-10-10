@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CINE-AI — Autonomous AI Video Production System</title>
+<title>CINE-AI — Autonomous AI Video Production System Studio</title>
 <meta name="description" content="End-to-End Topic-Agnostic Autonomous AI Video Production System for Long-form and Shorts.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,7 @@
 :root {
   --bg: #07090e;
   --panel: #0d111a;
-  --panel-border: rgba(0, 240, 255, 0.15);
+  --panel-border: rgba(0, 240, 255, 0.18);
   --panel-hover: #141b29;
   --cyan: #00f0ff;
   --cyan-glow: rgba(0, 240, 255, 0.35);
@@ -135,21 +135,21 @@ header {
 }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-/* Main Studio Layout */
+/* Main Layout */
 .studio-container {
-  max-width: 1440px;
+  max-width: 1480px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 20px;
   display: grid;
-  grid-template-columns: 340px 1fr 420px;
-  gap: 24px;
+  grid-template-columns: 360px 1fr 420px;
+  gap: 20px;
   min-height: calc(100vh - 64px);
 }
 @media (max-width: 1280px) {
   .studio-container { grid-template-columns: 1fr; }
 }
 
-/* Control Panel */
+/* Panels */
 .panel {
   background: var(--panel);
   border: 1px solid var(--panel-border);
@@ -157,14 +157,15 @@ header {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
+  position: relative;
 }
 .panel-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgba(255,255,255,0.08);
-  padding-bottom: 12px;
+  padding-bottom: 10px;
 }
 .panel-title {
   font-family: 'Space Grotesk', sans-serif;
@@ -181,20 +182,20 @@ header {
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 .input-group label {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   color: var(--mut-light);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 .input-control {
   background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
-  padding: 10px 14px;
+  padding: 10px 12px;
   color: #fff;
   font-size: 13px;
   font-family: inherit;
@@ -223,7 +224,7 @@ textarea.input-control {
   color: #fff;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 1px;
   text-transform: uppercase;
   padding: 14px;
@@ -234,17 +235,17 @@ textarea.input-control {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 8px;
+  margin-top: 4px;
 }
 .btn-produce:hover {
   transform: translateY(-2px);
   box-shadow: 0 0 35px var(--orange-glow);
 }
 
-/* Discovery Radar Matrix */
+/* Trend Radar Cards */
 .trend-card {
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.35);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 10px;
   padding: 12px;
@@ -296,13 +297,7 @@ textarea.input-control {
   background: var(--cyan);
 }
 
-/* Central Timeline & Scene Storyboard */
-.center-stage {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
+/* Stepper Bar */
 .pipeline-stepper {
   display: flex;
   background: var(--panel);
@@ -319,12 +314,8 @@ textarea.input-control {
   font-weight: 600;
   color: var(--mut);
 }
-.step-item.active {
-  color: var(--cyan);
-}
-.step-item.completed {
-  color: var(--green);
-}
+.step-item.active { color: var(--cyan); }
+.step-item.completed { color: var(--green); }
 .step-num {
   width: 22px;
   height: 22px;
@@ -345,23 +336,39 @@ textarea.input-control {
   color: #000;
 }
 
+/* Log Console */
+.log-console {
+  background: #000;
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--cyan);
+  height: 90px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 /* Scenes List */
 .scenes-grid {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: 500px;
+  max-height: 480px;
   overflow-y: auto;
   padding-right: 4px;
 }
 .scene-card {
-  background: var(--panel);
+  background: rgba(0,0,0,0.3);
   border: 1px solid var(--panel-border);
   border-radius: 10px;
-  padding: 16px;
+  padding: 14px;
   display: grid;
-  grid-template-columns: 80px 1fr 140px 100px;
-  gap: 16px;
+  grid-template-columns: 80px 1fr 130px 90px;
+  gap: 12px;
   align-items: center;
   transition: all 0.2s;
 }
@@ -371,44 +378,41 @@ textarea.input-control {
 }
 .scene-time {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--orange);
   background: rgba(255, 107, 43, 0.1);
-  padding: 4px 8px;
+  padding: 4px 6px;
   border-radius: 6px;
   text-align: center;
-}
-.scene-content {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
 }
 .scene-script {
   font-size: 13px;
   color: var(--text);
   font-weight: 500;
 }
-.scene-visual-prompt {
+.scene-prompt {
   font-size: 11px;
   color: var(--mut-light);
   font-style: italic;
+  margin-top: 2px;
 }
-.scene-asset-type {
-  font-size: 11px;
+.scene-asset-badge {
+  font-size: 10px;
   background: rgba(0, 240, 255, 0.1);
   color: var(--cyan);
   padding: 4px 8px;
   border-radius: 6px;
   border: 1px solid rgba(0, 240, 255, 0.2);
   text-align: center;
+  font-weight: 600;
 }
 .scene-actions {
   display: flex;
-  gap: 6px;
+  gap: 4px;
 }
 .btn-mini {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--mut-light);
   padding: 4px 8px;
   border-radius: 6px;
@@ -419,58 +423,69 @@ textarea.input-control {
 .btn-mini:hover {
   background: var(--cyan);
   color: #000;
+  font-weight: 600;
 }
 
-/* Right Panel: Video Preview Player & QA Report */
-.preview-player {
+/* Video Canvas Preview Player */
+.player-container {
   background: #000;
   border: 1px solid var(--panel-border);
   border-radius: var(--r);
-  aspect-ratio: 16/9;
   position: relative;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0,0,0,0.8);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 }
-.video-canvas {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.video-viewport {
+  aspect-ratio: 16/9;
   background: radial-gradient(circle at center, #111827, #030712);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
+  transition: aspect-ratio 0.3s ease;
 }
-.subtitle-overlay {
+.video-viewport.aspect-916 {
+  aspect-ratio: 9/16;
+  max-height: 480px;
+}
+
+.scene-bg-art {
   position: absolute;
-  bottom: 24px;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: all 0.5s ease;
+  filter: brightness(0.65) contrast(1.1);
+}
+.video-overlay-text {
+  position: absolute;
+  bottom: 40px;
+  left: 20px;
+  right: 20px;
   background: rgba(0, 0, 0, 0.85);
-  padding: 8px 16px;
-  border-radius: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 16px;
   color: #fff;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.9);
+  z-index: 10;
 }
-.subtitle-highlight {
+.highlight-word {
   color: var(--cyan);
   text-shadow: 0 0 10px var(--cyan-glow);
 }
 
 .player-controls {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   padding: 12px 16px;
-  background: linear-gradient(transparent, rgba(0,0,0,0.9));
+  background: rgba(10, 14, 22, 0.95);
+  border-top: 1px solid rgba(255,255,255,0.08);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -478,31 +493,35 @@ textarea.input-control {
 .btn-play {
   background: var(--cyan);
   border: none;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   color: #000;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 0 12px var(--cyan-glow);
 }
-.progress-bar {
+.progress-bar-wrap {
   flex: 1;
-  height: 4px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 2px;
+  height: 6px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 3px;
   position: relative;
   cursor: pointer;
+  overflow: hidden;
 }
-.progress-fill {
-  width: 45%;
+.progress-bar-fill {
+  width: 0%;
   height: 100%;
   background: var(--cyan);
   box-shadow: 0 0 8px var(--cyan-glow);
+  transition: width 0.1s linear;
 }
 
-/* QA & Metadata Report */
+/* QA Matrix */
 .qa-card {
   background: var(--panel);
   border: 1px solid var(--panel-border);
@@ -519,7 +538,7 @@ textarea.input-control {
   font-size: 11px;
 }
 .qa-item {
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.35);
   padding: 8px 10px;
   border-radius: 6px;
   display: flex;
@@ -528,12 +547,12 @@ textarea.input-control {
 .qa-label { color: var(--mut-light); }
 .qa-val { font-weight: 700; color: var(--green); }
 
-.thumbnails-row {
+.thumbs-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
 }
-.thumb-box {
+.thumb-item {
   aspect-ratio: 16/9;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1);
@@ -542,13 +561,15 @@ textarea.input-control {
   align-items: center;
   justify-content: center;
   font-size: 10px;
-  color: var(--mut);
+  color: var(--mut-light);
   cursor: pointer;
   transition: all 0.2s;
+  text-align: center;
 }
-.thumb-box:hover {
+.thumb-item.active, .thumb-item:hover {
   border-color: var(--cyan);
   color: #fff;
+  background: rgba(0, 240, 255, 0.1);
 }
 </style>
 </head>
@@ -562,40 +583,40 @@ textarea.input-control {
   </a>
 
   <div class="modes-bar">
-    <button class="mode-btn active" onclick="setMode('A')">⚡ Mode A: Prompt</button>
-    <button class="mode-btn" onclick="setMode('B')">📄 Mode B: Sources</button>
-    <button class="mode-btn" onclick="setMode('C')">🎯 Mode C: Directed</button>
-    <button class="mode-btn" onclick="setMode('D')">📡 Mode D: Discovery</button>
+    <button id="btnModeA" class="mode-btn active" onclick="switchMode('A')">⚡ Mode A: Prompt</button>
+    <button id="btnModeB" class="mode-btn" onclick="switchMode('B')">📄 Mode B: Sources</button>
+    <button id="btnModeC" class="mode-btn" onclick="switchMode('C')">🎯 Mode C: Directed</button>
+    <button id="btnModeD" class="mode-btn" onclick="switchMode('D')">📡 Mode D: Discovery</button>
   </div>
 
   <div class="system-status">
     <div class="badge-status">
       <div class="dot-live"></div>
-      <span>Stateless Adapters: OK</span>
+      <span>Pipeline Active</span>
     </div>
     <div>Cost Cap: $5.00</div>
   </div>
 </header>
 
-<!-- Main Workspace -->
+<!-- Main Studio Container -->
 <div class="studio-container">
 
-  <!-- Left Sidebar: Production Control & Research -->
+  <!-- Left Sidebar: Modes Form Controls & Trend Radar -->
   <div class="panel">
-    <div class="panel-header">
-      <div class="panel-title">🎛️ Production Parameters</div>
-      <span style="font-size:11px;color:var(--cyan);font-family:'JetBrains Mono';">v2.4 Auto</span>
-    </div>
-
-    <!-- Mode A Control -->
-    <div id="modeForm" class="input-group">
+    
+    <!-- Mode A Form -->
+    <div id="formModeA" class="input-group">
+      <div class="panel-header">
+        <div class="panel-title">⚡ Mode A: Autonomous Prompt</div>
+        <span style="font-size:10px;color:var(--cyan);font-family:'JetBrains Mono';">FULL PIPELINE</span>
+      </div>
       <label>Topic / Prompt</label>
-      <textarea id="topicInput" class="input-control" placeholder="e.g. The Quantum Computing Breakthrough that threatens global cryptography"></textarea>
+      <textarea id="topicInputA" class="input-control" placeholder="e.g. The Quantum Computing Breakthrough that threatens global cryptography"></textarea>
       
       <div class="select-row">
         <div class="input-group">
           <label>Aspect Ratio</label>
-          <select id="aspectSelect" class="input-control">
+          <select id="aspectSelect" class="input-control" onchange="changeAspect(this.value)">
             <option value="16:9">16:9 Landscape (YouTube)</option>
             <option value="9:16">9:16 Vertical (Shorts/TikTok)</option>
           </select>
@@ -619,17 +640,49 @@ textarea.input-control {
         </select>
       </div>
 
-      <button class="btn-produce" onclick="startAutonomousProduction()">
+      <button class="btn-produce" onclick="launchProduction()">
         🚀 LAUNCH PRODUCTION PIPELINE
+      </button>
+    </div>
+
+    <!-- Mode B Form -->
+    <div id="formModeB" class="input-group" style="display:none;">
+      <div class="panel-header">
+        <div class="panel-title">📄 Mode B: Source Ingestion</div>
+        <span style="font-size:10px;color:var(--orange);font-family:'JetBrains Mono';">EXTRACT & VERIFY</span>
+      </div>
+      <label>Source URLs (News, Research Papers, Transcripts)</label>
+      <input type="text" id="sourceUrl" class="input-control" placeholder="https://arxiv.org/abs/2405.12345 or YouTube URL">
+      
+      <label style="margin-top:6px;">Paste Transcript / Raw Dataset</label>
+      <textarea id="sourceText" class="input-control" placeholder="Paste article text, transcript or PDF summary..."></textarea>
+      
+      <button class="btn-produce" style="background:linear-gradient(135deg, var(--cyan), #0088cc);" onclick="launchModeB()">
+        🔍 INGEST, VERIFY & PRODUCE
+      </button>
+    </div>
+
+    <!-- Mode C Form -->
+    <div id="formModeC" class="input-group" style="display:none;">
+      <div class="panel-header">
+        <div class="panel-title">🎯 Mode C: Directed Storyboard</div>
+        <span style="font-size:10px;color:var(--purple);font-family:'JetBrains Mono';">EXACT CONSTRAINTS</span>
+      </div>
+      <label>Direct Script Input</label>
+      <textarea id="directedScript" class="input-control" placeholder="Scene 1: [Hook] Quantum computers are coming.&#10;Scene 2: [Data] 1,000 qubits solved RSA-2048 in 4 seconds."></textarea>
+      
+      <button class="btn-produce" style="background:linear-gradient(135deg, var(--purple), #7e22ce);" onclick="launchModeC()">
+        🎬 ASSEMBLE DIRECTED SCRIPT
       </button>
     </div>
 
     <!-- Mode D Radar Section -->
     <div class="panel-header" style="margin-top:10px;">
-      <div class="panel-title">📡 Viral Trend Radar</div>
+      <div class="panel-title">📡 Mode D: Discovery Radar</div>
+      <span style="font-size:10px;color:var(--green);font-family:'JetBrains Mono';">LIVE RADAR</span>
     </div>
-    <div style="display:flex;flex-direction:column;gap:10px;">
-      <div class="trend-card" onclick="loadTrend('Quantum Computing Security Break')">
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="trend-card" onclick="selectTrend('Quantum Computing Breakthrough')">
         <div class="trend-header">
           <span class="trend-score">SCORE: 9.6/10</span>
           <span style="font-size:10px;color:var(--orange);">HIGH VELOCITY</span>
@@ -643,7 +696,7 @@ textarea.input-control {
         </div>
       </div>
 
-      <div class="trend-card" onclick="loadTrend('AI Autonomous Agents in Logistics')">
+      <div class="trend-card" onclick="selectTrend('Autonomous AI Workforce in Supply & Freight')">
         <div class="trend-header">
           <span class="trend-score">SCORE: 9.2/10</span>
           <span style="font-size:10px;color:var(--cyan);">VIRAL POTENTIAL</span>
@@ -659,114 +712,77 @@ textarea.input-control {
     </div>
   </div>
 
-  <!-- Center Workspace: Pipeline & Storyboard Scene Breakdown -->
-  <div class="center-stage">
+  <!-- Center Stage: Pipeline Stepper, Console & Storyboard -->
+  <div style="display:flex;flex-direction:column;gap:16px;">
     <!-- Stepper Bar -->
     <div class="pipeline-stepper">
-      <div class="step-item completed">
+      <div id="step1" class="step-item completed">
         <div class="step-num">✓</div>
         <span>Research</span>
       </div>
-      <div class="step-item completed">
+      <div id="step2" class="step-item completed">
         <div class="step-num">✓</div>
         <span>Scripting</span>
       </div>
-      <div class="step-item active">
+      <div id="step3" class="step-item active">
         <div class="step-num">3</div>
-        <span>Storyboard & Media</span>
+        <span>Storyboard</span>
       </div>
-      <div class="step-item">
+      <div id="step4" class="step-item">
         <div class="step-num">4</div>
         <span>TTS Audio</span>
       </div>
-      <div class="step-item">
+      <div id="step5" class="step-item">
         <div class="step-num">5</div>
         <span>Compositing</span>
       </div>
     </div>
 
-    <!-- Storyboard Scenes Table -->
+    <!-- Execution Console Logs -->
+    <div class="log-console" id="logConsole">
+      <div>[SYSTEM READY] Stateless Adapters initialized. Ready for production.</div>
+    </div>
+
+    <!-- Storyboard Scenes Panel -->
     <div class="panel">
       <div class="panel-header">
-        <div class="panel-title">🎬 Semantic Storyboard & Media Match</div>
-        <div style="font-size:12px;color:var(--mut-light);">Match Hierarchy: Stock → Midjourney/Flux → Motion Chart</div>
+        <div class="panel-title">🎬 Timed Scenes & Semantic Visual Match</div>
+        <button class="btn-mini" style="background:var(--cyan);color:#000;font-weight:700;" onclick="addNewScene()">+ Add Scene</button>
       </div>
 
-      <div class="scenes-grid" id="scenesList">
-        <!-- Scene 1 -->
-        <div class="scene-card">
-          <div class="scene-time">00:00-00:03</div>
-          <div class="scene-content">
-            <div class="scene-script">"What if every encrypted password on Earth became instantly readable?"</div>
-            <div class="scene-visual-prompt">Prompt: Cyberpunk glowing neon server room with digital padlock breaking</div>
-          </div>
-          <div class="scene-asset-type">AI Visual (Flux v1)</div>
-          <div class="scene-actions">
-            <button class="btn-mini">Regen</button>
-            <button class="btn-mini">Edit</button>
-          </div>
-        </div>
-
-        <!-- Scene 2 -->
-        <div class="scene-card">
-          <div class="scene-time">00:03-00:08</div>
-          <div class="scene-content">
-            <div class="scene-script">"In a secret lab test yesterday, a 1,000-qubit processor solved RSA-2048 in under four seconds."</div>
-            <div class="scene-visual-prompt">Prompt: Holographic quantum processor chip emitting blue laser beams</div>
-          </div>
-          <div class="scene-asset-type">Dynamic Motion Chart</div>
-          <div class="scene-actions">
-            <button class="btn-mini">Regen</button>
-            <button class="btn-mini">Edit</button>
-          </div>
-        </div>
-
-        <!-- Scene 3 -->
-        <div class="scene-card">
-          <div class="scene-time">00:08-00:15</div>
-          <div class="scene-content">
-            <div class="scene-script">"Global financial networks and satellite communications are now scrambling to deploy lattice cryptography."</div>
-            <div class="scene-visual-prompt">Prompt: World map with glowing red network alert nodes and satellites</div>
-          </div>
-          <div class="scene-asset-type">Stock Video (4K)</div>
-          <div class="scene-actions">
-            <button class="btn-mini">Regen</button>
-            <button class="btn-mini">Edit</button>
-          </div>
-        </div>
+      <div class="scenes-grid" id="scenesContainer">
+        <!-- Scenes rendered dynamically via JavaScript -->
       </div>
     </div>
   </div>
 
-  <!-- Right Panel: Live Render Canvas Player & QA Report -->
-  <div style="display:flex;flex-direction:column;gap:20px;">
-    <!-- Live Preview Player -->
-    <div class="preview-player">
-      <div class="video-canvas">
-        <div style="font-size:48px;margin-bottom:10px;">⚡</div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--cyan);">CINE-AI COMPOSITOR ENGINE</div>
-        <div style="font-size:12px;color:var(--mut-light);margin-top:4px;">1080p 60fps • Remotion Render Node</div>
-
-        <!-- Dynamic Kinetic Subtitle Overlay -->
-        <div class="subtitle-overlay">
-          RSA-2048 Solved in <span class="subtitle-highlight">Under 4 Seconds</span>
+  <!-- Right Panel: Live Preview Player & QA Audit Package -->
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <!-- Player Container -->
+    <div class="player-container">
+      <div class="video-viewport" id="videoViewport">
+        <div class="scene-bg-art" id="sceneBgArt" style="background-image: linear-gradient(135deg, #0f172a, #0284c7);"></div>
+        <div style="font-size:32px;z-index:5;">⚡</div>
+        
+        <div class="video-overlay-text" id="subtitleOverlay">
+          RSA-2048 Solved in <span class="highlight-word">Under 4 Seconds</span>
         </div>
       </div>
 
       <div class="player-controls">
-        <button class="btn-play">▶</button>
-        <div class="progress-bar">
-          <div class="progress-fill"></div>
+        <button class="btn-play" id="btnPlay" onclick="togglePlay()">▶</button>
+        <div class="progress-bar-wrap" onclick="seekVideo(event)">
+          <div class="progress-bar-fill" id="progressFill"></div>
         </div>
-        <span style="font-size:11px;font-family:'JetBrains Mono';color:#fff;">00:05 / 00:60</span>
+        <span style="font-size:11px;font-family:'JetBrains Mono';color:#fff;" id="timeDisplay">00:00 / 00:30</span>
       </div>
     </div>
 
-    <!-- Automated QA & Metadata Package -->
+    <!-- QA Audit & Package Delivery -->
     <div class="qa-card">
       <div class="panel-header">
-        <div class="panel-title">🛡️ Automated QA & Audit Report</div>
-        <span style="font-size:11px;color:var(--green);font-family:'JetBrains Mono';">PASSED 100%</span>
+        <div class="panel-title">🛡️ QA & Master Delivery Package</div>
+        <span class="qa-val">PASSED 100%</span>
       </div>
 
       <div class="qa-grid">
@@ -776,17 +792,17 @@ textarea.input-control {
         <div class="qa-item"><span class="qa-label">Audio Peak</span><span class="qa-val">-1.2 dB</span></div>
       </div>
 
-      <div style="font-size:12px;font-weight:600;color:var(--mut-light);margin-top:4px;">AI THUMBNAIL CONCEPTS</div>
-      <div class="thumbnails-row">
-        <div class="thumb-box">Concept 1</div>
-        <div class="thumb-box">Concept 2</div>
-        <div class="thumb-box">Concept 3</div>
-        <div class="thumb-box">Concept 4</div>
+      <div style="font-size:11px;font-weight:700;color:var(--mut-light);margin-top:2px;">AI THUMBNAIL CONCEPTS</div>
+      <div class="thumbs-grid">
+        <div class="thumb-item active">Concept 1</div>
+        <div class="thumb-item">Concept 2</div>
+        <div class="thumb-item">Concept 3</div>
+        <div class="thumb-item">Concept 4</div>
       </div>
 
       <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:10px;display:flex;justify-content:space-between;align-items:center;font-size:12px;">
         <span style="color:var(--mut-light);">Production Cost: <strong style="color:var(--cyan);">$0.42</strong></span>
-        <button class="btn-mini" style="background:var(--cyan);color:#000;font-weight:700;">DOWNLOAD MASTER RENDER</button>
+        <button class="btn-mini" style="background:var(--cyan);color:#000;font-weight:700;padding:6px 12px;" onclick="downloadMaster()">DOWNLOAD MASTER RENDER</button>
       </div>
     </div>
   </div>
@@ -794,19 +810,195 @@ textarea.input-control {
 </div>
 
 <script>
-function setMode(mode) {
+// State Management
+let currentMode = 'A';
+let isPlaying = false;
+let currentTime = 0;
+let totalTime = 30;
+let timerInterval = null;
+let currentSceneIndex = 0;
+
+let scenes = [
+  { time: "00:00 - 00:05", text: "What if every encrypted password on Earth became instantly readable?", prompt: "Cyberpunk glowing server room, digital padlock breaking", asset: "AI Visual (Flux v1)", bg: "linear-gradient(135deg, #090d16, #00f0ff)" },
+  { time: "00:05 - 00:15", text: "In a secret lab test yesterday, a 1,000-qubit processor solved RSA-2048 in under four seconds.", prompt: "Holographic quantum processor chip emitting blue laser beams", asset: "Dynamic Motion Chart", bg: "linear-gradient(135deg, #1e1b4b, #6366f1)" },
+  { time: "00:15 - 00:25", text: "Global financial networks and satellite communications are now scrambling to deploy lattice cryptography.", prompt: "World map with glowing red network alert nodes and satellites", asset: "Stock Video (4K)", bg: "linear-gradient(135deg, #111827, #0284c7)" },
+  { time: "00:25 - 00:30", text: "Subscribe for the next autonomous AI intelligence report.", prompt: "Futuristic neon subscribe badge pulsing", asset: "Motion Graphic Overlay", bg: "linear-gradient(135deg, #311004, #ff6b2b)" }
+];
+
+// Initialize
+renderScenes();
+
+function switchMode(mode) {
+  currentMode = mode;
   document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  document.getElementById('btnMode' + mode).classList.add('active');
+
+  document.getElementById('formModeA').style.display = mode === 'A' ? 'flex' : 'none';
+  document.getElementById('formModeB').style.display = mode === 'B' ? 'flex' : 'none';
+  document.getElementById('formModeC').style.display = mode === 'C' ? 'flex' : 'none';
+
+  log('Switched to Mode ' + mode);
 }
 
-function loadTrend(topic) {
-  document.getElementById('topicInput').value = topic;
+function selectTrend(topic) {
+  document.getElementById('topicInputA').value = topic;
+  log('Selected Trend: ' + topic);
 }
 
-function startAutonomousProduction() {
-  const topic = document.getElementById('topicInput').value;
-  if (!topic) { alert('Please enter a topic or select a trend'); return; }
-  alert('🚀 Launching Autonomous Production Pipeline for: ' + topic + '\n\nRunning Research -> Scripting -> Semantic Storyboard -> TTS Multi-track -> FFmpeg Composition...');
+function changeAspect(val) {
+  const viewport = document.getElementById('videoViewport');
+  if (val === '9:16') {
+    viewport.classList.add('aspect-916');
+  } else {
+    viewport.classList.remove('aspect-916');
+  }
+  log('Aspect Ratio set to ' + val);
+}
+
+function renderScenes() {
+  const container = document.getElementById('scenesContainer');
+  container.innerHTML = scenes.map((s, i) => `
+    <div class="scene-card">
+      <div class="scene-time">${s.time}</div>
+      <div>
+        <div class="scene-script">"${s.text}"</div>
+        <div class="scene-prompt">Prompt: ${s.prompt}</div>
+      </div>
+      <div class="scene-asset-badge">${s.asset}</div>
+      <div class="scene-actions">
+        <button class="btn-mini" onclick="regenScene(${i})">Regen</button>
+        <button class="btn-mini" onclick="editScene(${i})">Edit</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function log(msg) {
+  const consoleEl = document.getElementById('logConsole');
+  const div = document.createElement('div');
+  div.textContent = '[' + new Date().toLocaleTimeString() + '] ' + msg;
+  consoleEl.appendChild(div);
+  consoleEl.scrollTop = consoleEl.scrollHeight;
+}
+
+function launchProduction() {
+  const topic = document.getElementById('topicInputA').value || 'Quantum Computing Cryptography Breakthrough';
+  log('Starting Production Pipeline for: ' + topic);
+  
+  // Pipeline Stepper Animation
+  animateStepper();
+}
+
+function launchModeB() {
+  const url = document.getElementById('sourceUrl').value || 'Uploaded Document';
+  log('Extracting entities & facts from: ' + url);
+  animateStepper();
+}
+
+function launchModeC() {
+  log('Assembling Directed Storyboard constraints...');
+  animateStepper();
+}
+
+function animateStepper() {
+  let step = 1;
+  const interval = setInterval(() => {
+    step++;
+    if (step <= 5) {
+      document.getElementById('step' + step).classList.add('active');
+      if (step > 1) document.getElementById('step' + (step - 1)).classList.add('completed');
+      log('Completed Pipeline Step ' + (step - 1));
+    } else {
+      document.getElementById('step5').classList.add('completed');
+      log('🎉 PIPELINE COMPLETE! Master video compiled.');
+      clearInterval(interval);
+      togglePlay();
+    }
+  }, 800);
+}
+
+function togglePlay() {
+  isPlaying = !isPlaying;
+  const btn = document.getElementById('btnPlay');
+  if (isPlaying) {
+    btn.textContent = '⏸';
+    timerInterval = setInterval(() => {
+      currentTime += 0.5;
+      if (currentTime > totalTime) {
+        currentTime = 0;
+      }
+      updatePlayer();
+    }, 500);
+  } else {
+    btn.textContent = '▶';
+    clearInterval(timerInterval);
+  }
+}
+
+function updatePlayer() {
+  const percent = (currentTime / totalTime) * 100;
+  document.getElementById('progressFill').style.width = percent + '%';
+  document.getElementById('timeDisplay').textContent = 
+    (currentTime < 10 ? '00:0' : '00:') + Math.floor(currentTime) + ' / 00:' + totalTime;
+
+  // Sync subtitle & background
+  const idx = Math.min(Math.floor((currentTime / totalTime) * scenes.length), scenes.length - 1);
+  if (scenes[idx]) {
+    document.getElementById('subtitleOverlay').innerHTML = highlightText(scenes[idx].text);
+    document.getElementById('sceneBgArt').style.background = scenes[idx].bg;
+  }
+}
+
+function highlightText(text) {
+  const words = text.split(' ');
+  if (words.length > 4) {
+    words[3] = '<span class="highlight-word">' + words[3] + '</span>';
+  }
+  return words.join(' ');
+}
+
+function seekVideo(e) {
+  const rect = e.currentTarget.getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+  const percent = clickX / rect.width;
+  currentTime = percent * totalTime;
+  updatePlayer();
+}
+
+function regenScene(i) {
+  log('Regenerating scene ' + (i + 1) + ' visual prompt...');
+  scenes[i].asset = 'AI Visual (Flux v2 Optimized)';
+  scenes[i].bg = 'linear-gradient(135deg, #10b981, #00f0ff)';
+  renderScenes();
+  updatePlayer();
+}
+
+function editScene(i) {
+  const newScript = prompt('Edit scene script:', scenes[i].text);
+  if (newScript) {
+    scenes[i].text = newScript;
+    renderScenes();
+    updatePlayer();
+    log('Updated scene ' + (i + 1) + ' script.');
+  }
+}
+
+function addNewScene() {
+  scenes.push({
+    time: "00:30 - 00:35",
+    text: "New autonomous scene added dynamically.",
+    prompt: "Futuristic digital interface animation",
+    asset: "Motion Graphic",
+    bg: "linear-gradient(135deg, #a855f7, #00f0ff)"
+  });
+  totalTime += 5;
+  renderScenes();
+  log('Added new scene to storyboard.');
+}
+
+function downloadMaster() {
+  alert('📥 Downloading Master Render (1080p 60fps MP4) + Metadata Package (JSON)...');
+  log('Downloaded Master Render & Metadata Package.');
 }
 </script>
 
