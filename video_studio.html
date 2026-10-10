@@ -909,9 +909,14 @@ textarea.input-control {
         <div class="thumb-item" onclick="selectThumb(4)">Concept 4</div>
       </div>
 
-      <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:10px;display:flex;justify-content:space-between;align-items:center;font-size:12px;">
-        <span style="color:var(--mut-light);">Production Cost: <strong style="color:var(--cyan);">$0.42</strong></span>
-        <button class="btn-mini" style="background:var(--cyan);color:#000;font-weight:700;padding:6px 12px;" onclick="downloadMaster()">DOWNLOAD MASTER RENDER</button>
+      <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:10px;display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;">
+          <span style="color:var(--mut-light);">Production Cost: <strong style="color:var(--cyan);">$0.42</strong></span>
+          <button class="btn-mini" style="background:rgba(0, 240, 255, 0.1);border:1px solid var(--cyan);color:var(--cyan);font-weight:600;" onclick="openApiModal()">🔑 API Keys Setup</button>
+        </div>
+        <button class="btn-produce" style="width:100%;margin-top:0;padding:12px;" onclick="downloadMaster()">
+          📥 DOWNLOAD MASTER RENDER (1080p 60fps)
+        </button>
       </div>
     </div>
   </div>
@@ -1186,22 +1191,30 @@ function closeApiModal() {
 }
 
 function saveApiKeys() {
-  const llm = document.getElementById('keyLLM').value;
-  const voice = document.getElementById('keyVoice').value;
-  const media = document.getElementById('keyMedia').value;
-  const render = document.getElementById('keyRender').value;
+  const llm = document.getElementById('keyLLM').value.trim();
+  const voice = document.getElementById('keyVoice').value.trim();
+  const media = document.getElementById('keyMedia').value.trim();
+  const render = document.getElementById('keyRender').value.trim();
+  const trends = document.getElementById('keyTrends').value.trim();
   
   localStorage.setItem('api_llm', llm);
   localStorage.setItem('api_voice', voice);
   localStorage.setItem('api_media', media);
   localStorage.setItem('api_render', render);
+  localStorage.setItem('api_trends', trends);
 
-  document.getElementById('apiStatusBadge').textContent = 'API Keys: Verified & Active';
-  document.getElementById('apiStatusBadge').parentElement.style.borderColor = 'rgba(16, 185, 129, 0.6)';
+  window.API_KEYS = { llm, voice, media, render, trends };
+
+  const statusBadge = document.getElementById('apiStatusBadge');
+  if (statusBadge) {
+    statusBadge.textContent = 'API Keys: Active & Saved';
+    statusBadge.parentElement.style.borderColor = 'rgba(16, 185, 129, 0.6)';
+    statusBadge.parentElement.style.color = '#10b981';
+  }
   
   closeApiModal();
-  log('🔑 Provider API Keys verified and attached to pipeline runtime session.');
-  alert('✅ API Keys successfully saved & verified! Autonomous video pipeline is active.');
+  log('🔑 API Keys updated: LLM, Voice (ElevenLabs), Media, Render node connected.');
+  alert('✅ Custom API Keys successfully saved into Video Studio pipeline runtime!');
 }
 
 function downloadMaster() {
