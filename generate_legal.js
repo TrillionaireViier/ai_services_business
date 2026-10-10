@@ -2,6 +2,7 @@ const fs = require('fs');
 
 const css = `
 :root{--bg:#0a0f1c;--panel:#111a2e;--line:#22304d;--text:#e8edf7;--mut:#8d9bb8;--acc:#3dffa2;--acc2:#4d8bff;--r:14px}
+[data-theme=light]{--bg:#ffffff;--panel:#f8fafc;--line:#e2e8f0;--text:#0f172a;--mut:#475569;--acc:#059669;--acc2:#2563eb}
 *{box-sizing:border-box;margin:0}
 body{background:var(--bg);color:var(--text);font:400 16px/1.6 Onest,sans-serif;padding:0;margin:0;}
 header{padding:20px;border-bottom:1px solid var(--line);display:flex;align-items:center;background:var(--panel);position:sticky;top:0;z-index:100;}
@@ -20,6 +21,7 @@ function makePage(lang, title, content, backLink, backText, pageSlug) {
   return `<!DOCTYPE html>
 <html lang="${lang}">
 <head>
+<script>if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light';</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${title}</title>
@@ -32,6 +34,7 @@ function makePage(lang, title, content, backLink, backText, pageSlug) {
   <div style="margin-left:auto;display:flex;align-items:center;">
     <a href="/${pageSlug}" style="margin-right:15px;color:${lang === 'uk' ? 'var(--text)' : 'var(--mut)'};font-weight:${lang === 'uk' ? 'bold' : 'normal'};text-decoration:none;">UK</a>
     <a href="/en/${pageSlug}" style="margin-right:20px;color:${lang === 'en' ? 'var(--text)' : 'var(--mut)'};font-weight:${lang === 'en' ? 'bold' : 'normal'};text-decoration:none;">EN</a>
+    <button id="theme" style="margin-right:15px;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:16px;" aria-label="Toggle theme">◐</button>
     <a href="${backLink}" style="color:var(--mut);text-decoration:none;">← ${backText}</a>
   </div>
 </header>
@@ -48,6 +51,7 @@ function makePage(lang, title, content, backLink, backText, pageSlug) {
     </div>
   </div>
 </footer>
+<script>document.getElementById('theme').onclick=()=>{const r=document.documentElement;const isL=r.dataset.theme==='light';r.dataset.theme=isL?'dark':'light';localStorage.setItem('theme',isL?'dark':'light');};</script>
 </body>
 </html>`;
 }

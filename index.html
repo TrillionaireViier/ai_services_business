@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
+<script>if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light';</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Готово — готові сайти, боти та хостинг під ключ</title>
@@ -10,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0a0f1c;--panel:#111a2e;--line:#22304d;--text:#e8edf7;--mut:#8d9bb8;--acc:#3dffa2;--acc2:#4d8bff;--r:14px}
-:root[data-theme=light]{--bg:#f4f7fc;--panel:#fff;--line:#d9e1ef;--text:#0e1730;--mut:#5a6885;--acc:#0a9f62;--acc2:#2a62e8}
+[data-theme=light]{--bg:#ffffff;--panel:#f8fafc;--line:#e2e8f0;--text:#0f172a;--mut:#475569;--acc:#059669;--acc2:#2563eb}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font:400 16px/1.6 Onest,system-ui,sans-serif}
@@ -283,7 +284,7 @@ $('#leadForm').addEventListener('submit',e=>{
 // тема
 $('#theme').onclick=()=>{
  const r=document.documentElement;
- r.dataset.theme=r.dataset.theme==='light'?'dark':'light';
+ const isL=r.dataset.theme==='light';r.dataset.theme=isL?'dark':'light';localStorage.setItem('theme',isL?'dark':'light');
 };
 </script>
 </body>
