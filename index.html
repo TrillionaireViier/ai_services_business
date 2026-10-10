@@ -234,7 +234,7 @@ const addons=[
  ['Налаштування реклами',3500],['Хостинг на рік (Бізнес)',2880]
 ];
 const $=s=>document.querySelector(s);
-const card=(x,price,sub,id)=>`<div class="card${x.hot?' hot':''}"><h3>${x.n}</h3>${x.d?`<p>${x.d}</p>`:''}${x.t?`<span class="tag">Запуск: ${x.t}</span>`:''}<ul>${x.f.map(i=>`<li>${i}</li>`).join('')}</ul><div class="price">${price}<small>${sub||''}</small></div><div style="display:flex;flex-direction:column;gap:8px;margin-top:auto;"><button class="btn${x.hot?'':' ghost'}" data-order="${x.n}" data-price="${price}">Замовити</button><a href="service-${id}" class="btn ghost" style="padding:6px;border:none;text-decoration:underline;font-size:13px;color:var(--mut);text-align:center;">Дізнатися більше</a></div></div>`;
+const card=(x,price,sub,id)=>`<div class="card${x.hot?' hot':''}"><h3>${x.n}</h3>${x.d?`<p>${x.d}</p>`:''}${x.t?`<span class="tag">Запуск: ${x.t}</span>`:''}<ul>${x.f.map(i=>`<li>${i}</li>`).join('')}</ul><div class="price">${price}<small>${sub||''}</small></div><div style="display:flex;flex-direction:column;gap:8px;margin-top:auto;"><button class="btn${x.hot?'':' ghost'}" data-order="${x.n}" data-price="${price}">Замовити</button><a href="/service-${id}" class="btn ghost" style="padding:6px;border:none;text-decoration:underline;font-size:13px;color:var(--mut);text-align:center;">Дізнатися більше</a></div></div>`;
 $('#siteGrid').innerHTML=sites.map((x,i)=>card(x,fmt(x.p),' / фіксовано', i)).join('');
 $('#botGrid').innerHTML=bots.map((x,i)=>card(x,'від '+fmt(x.p),'', i+4)).join('');
 function renderHost(p){
