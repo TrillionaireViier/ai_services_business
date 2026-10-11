@@ -810,11 +810,6 @@ textarea.input-control {
         📡 SELECT TOP TREND & PRODUCE
       </button>
     </div>
-          <div class="bar-item">Curiosity<div class="bar-val"><div class="bar-fill" style="width:94%;"></div></div></div>
-          <div class="bar-item">Visual<div class="bar-val"><div class="bar-fill" style="width:92%;"></div></div></div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- Center Stage: Pipeline Stepper, Console & Storyboard -->
@@ -1219,12 +1214,36 @@ function saveApiKeys() {
 
 function downloadMaster() {
   log('📥 Triggering Download: Master Render (1080p 60fps MP4) + Metadata Package (JSON)');
-  alert('✅ Master Video Render & Metadata Package successfully generated!
-
-- File: master_render_1080p60.mp4
-- QA Status: Passed 100%
-- Total Cost: $0.42');
+  alert(`✅ Master Video Render & Metadata Package successfully generated!\n\n- File: master_render_1080p60.mp4\n- QA Status: Passed 100%\n- Total Cost: $0.42`);
 }
+
+// Startup Initialization
+window.addEventListener('DOMContentLoaded', () => {
+  renderScenes();
+  updatePlayer();
+
+  // Load saved API keys from storage if available
+  const savedLLM = localStorage.getItem('api_llm');
+  const savedVoice = localStorage.getItem('api_voice');
+  const savedMedia = localStorage.getItem('api_media');
+  const savedRender = localStorage.getItem('api_render');
+  const savedTrends = localStorage.getItem('api_trends');
+
+  if (savedLLM) document.getElementById('keyLLM').value = savedLLM;
+  if (savedVoice) document.getElementById('keyVoice').value = savedVoice;
+  if (savedMedia) document.getElementById('keyMedia').value = savedMedia;
+  if (savedRender) document.getElementById('keyRender').value = savedRender;
+  if (savedTrends) document.getElementById('keyTrends').value = savedTrends;
+
+  if (savedLLM || savedVoice || savedMedia || savedRender) {
+    const statusBadge = document.getElementById('apiStatusBadge');
+    if (statusBadge) {
+      statusBadge.textContent = 'API Keys: Configured';
+      statusBadge.parentElement.style.borderColor = 'rgba(16, 185, 129, 0.6)';
+      statusBadge.parentElement.style.color = '#10b981';
+    }
+  }
+});
 </script>
 
 </body>
